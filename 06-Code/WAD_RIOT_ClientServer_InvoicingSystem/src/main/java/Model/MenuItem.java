@@ -55,7 +55,7 @@ public MenuItem(String id, String type, String name, float price, boolean paysTa
         return price;
     }
 
-    public void setTelefono(float price) {
+    public void setprice(float price) {
         this.price = price;
     }
 
@@ -63,7 +63,7 @@ public MenuItem(String id, String type, String name, float price, boolean paysTa
         return paysTaxes;
     }
 
-    public void setDireccion(boolean paysTaxes) {
+    public void setpaysTaxes(boolean paysTaxes) {
         this.paysTaxes = paysTaxes;
     }
     

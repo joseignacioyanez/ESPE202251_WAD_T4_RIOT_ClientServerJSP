@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editar Producto</title>
+</head>
+<body>
+	<h1>Editar Producto</h1>
+	<form action="/my-handling-form-page" method="post">
+		<ul>
+			<li>
+				<input type="submit" value="Cancelar">
+			</li>
+			<li>
+				<label for="checkbox">Activo:</label>
+				<input type="checkbox" id="checkbox" name="checkbox">
+			</li>
+			<li>
+				<label for="code">Código:</label>
+				<input type="text" id="code" name="code">
+			</li>
+ 			 <li>
+  				<form action="../../form-result.php" method="post" target="_blank">
+	   				<p>
+	   					Categoría: <input type="search" name="busquedamodelos" list="list">
+	  				</p>
+				</form>
+				<datalist id="list">
+					<option value="Foods">
+					<option value="Service">
+				</datalist>
+ 			</li>
+ 			<li>
+   				<label for="name">Nombte:</label>
+    			<input type="text" id="name" name="name"></imput>
+  			</li>
+  			<li>
+   				<label for="name">Precio:</label>
+    			<input type="text" id="price" name="price"></imput>
+  			</li>
+  			<li>
+				<label for="checkbox">IVA:</label>
+				<input type="checkbox" id="iva" name="iva"></imput>
+			</li>
+			<li>
+				<input type="submit" value="Guardar">
+			</li>
+		</ul>
+	</form>
+</body>
+</html>

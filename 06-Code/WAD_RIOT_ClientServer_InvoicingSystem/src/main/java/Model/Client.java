@@ -2,14 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.web;
+package Model;
+
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author mishe
  */
 public class Client {
-    String id;
+    ObjectId _id;
     String name;
     String address;
     String cellphone;
@@ -18,20 +20,20 @@ public class Client {
     public Client() {
     }
 
-    public Client(String id, String name, String address, String cellphone, String email) {
-        this.id = id;
+    public Client(ObjectId id, String name, String address, String cellphone, String email) {
+        this._id = id;
         this.name = name;
         this.address = address;
         this.cellphone = cellphone;
         this.email = email;
     }
 
-    public String getId() {
-        return id;
+    public ObjectId getId() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
     public String getName() {

@@ -38,6 +38,11 @@
             <artifactId>gson</artifactId>
             <version>2.10</version>
         </dependency>
+        <dependency>  
+            <groupId>org.javatuples</groupId>  
+            <artifactId>javatuples</artifactId>  
+            <version>1.2</version>  
+        </dependency> 
     </dependencies>
     
      <build>
@@ -57,7 +62,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.1.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -87,6 +92,15 @@
                     </execution>
                 </executions>
             </plugin>
+             <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>2.4.4</version>
+                <configuration>
+                  <version>1</version>
+                  <projectId>GCLOUD_CONFIG</projectId>
+                </configuration>
+              </plugin>
         </plugins>
     </build>
 </project>

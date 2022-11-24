@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package menuitem;
+package Model;
+
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author robert
  */
 public class MenuItem {
-    private String id;
+    private ObjectId _id;
     private String type;
     private String name;
     private float price;
@@ -19,20 +21,20 @@ public class MenuItem {
 public MenuItem() {
     
 }
-public MenuItem(String id, String type, String name, float price, boolean paysTaxes) {
-        this.id = id;
+public MenuItem(ObjectId id, String type, String name, float price, boolean paysTaxes) {
+        this._id = id;
         this.type = type;
         this.name = name;
         this.price = price;
         this.paysTaxes = paysTaxes;
     }
 
-    public String getId() {
-        return id;
+    public ObjectId getId() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
     public String gettype() {
@@ -55,7 +57,7 @@ public MenuItem(String id, String type, String name, float price, boolean paysTa
         return price;
     }
 
-    public void setprice(float price) {
+    public void setTelefono(float price) {
         this.price = price;
     }
 
@@ -63,7 +65,7 @@ public MenuItem(String id, String type, String name, float price, boolean paysTa
         return paysTaxes;
     }
 
-    public void setpaysTaxes(boolean paysTaxes) {
+    public void setDireccion(boolean paysTaxes) {
         this.paysTaxes = paysTaxes;
     }
     

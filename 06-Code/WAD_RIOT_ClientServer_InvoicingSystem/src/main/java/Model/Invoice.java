@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package invoice;
+package Model;
 
-import com.sun.corba.se.spi.ior.ObjectId;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import org.bson.types.ObjectId;
 
 /**
  *
- * @author rafas
+ * @author robert
  */
 public class Invoice {
 
     
-    ObjectId _id;
+    private ObjectId _id;
     private LocalDate invoiceDate;
     private int invoiceNumber;
     private String clientlDCard;
@@ -27,12 +27,12 @@ public class Invoice {
     private BigDecimal totalTaxesInvoice;
     private BigDecimal totalInvoice;
     private String paymentMethod;
-    private invoiceItem invoicelItems;
+    private InvoiceItem invoicelItems;
  
-public Invoice() {
+    public Invoice() {
+    }
     
-}
-public Invoice(ObjectId id,LocalDate invoiceDate, int invoiceNumber, String clientlDCard, boolean orderToGo, String clientName, String clientEmail,BigDecimal subtotalInvoice,BigDecimal totalTaxesInvoice, BigDecimal totalInvoice, String paymentMethod, invoiceItem invoicelItems) {
+    public Invoice(ObjectId id,LocalDate invoiceDate, int invoiceNumber, String clientlDCard, boolean orderToGo, String clientName, String clientEmail,BigDecimal subtotalInvoice,BigDecimal totalTaxesInvoice, BigDecimal totalInvoice, String paymentMethod, InvoiceItem invoicelItems) {
         this._id = id;
         this.invoiceDate = invoiceDate;
         this.invoiceNumber = invoiceNumber;
@@ -47,7 +47,7 @@ public Invoice(ObjectId id,LocalDate invoiceDate, int invoiceNumber, String clie
         this.invoicelItems = invoicelItems;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return _id;
     }
 
@@ -116,86 +116,92 @@ public Invoice(ObjectId id,LocalDate invoiceDate, int invoiceNumber, String clie
         this.paymentMethod = paymentMethod;
     }
     
-    public invoiceItem getinvoicelItems() {
+    public InvoiceItem getinvoicelItems() {
         return invoicelItems;
     }
 
-    public void setinvoicelItems(invoiceItem invoicelItems) {
+    public void setinvoicelItems(InvoiceItem invoicelItems) {
         this.invoicelItems = invoicelItems;
     }
     
-    public class InvoiceItem extends Invoice {
-    private ObjectId menuItemld;
-    private String menuItemName;
-    private BigDecimal individualPrice;
-    private int quantity;
-    private BigDecimal subtotal;
-    private boolean paysTaxes;
+    /*
+        Nested class to store each item details in the Invoice
+        We used this structure to make ORM, to map exactly to the structure that is on the MongoDB
+        
+        We have some duplicated attributes in the collections, but we followed the MongoDB principle
+        of keeping togther all the data that is gonna be used together.
+    
+        Also, Invoices aren't neede t change, they get created and Archived
+    */
+    public class InvoiceItem{
+        private ObjectId menuItemld;
+        private String menuItemName;
+        private BigDecimal individualPrice;
+        private int quantity;
+        private BigDecimal subtotal;
+        private boolean paysTaxes;
     
  
-public InvoiceItem() {
+        public InvoiceItem() {  
+        }
+
+        public InvoiceItem(ObjectId menuItemld, String menuItemName,BigDecimal individualPrice,int quantity, BigDecimal subtotal, boolean paysTaxes ) {
+            this.menuItemld = menuItemld;
+            this.menuItemName = menuItemName;
+            this.individualPrice= individualPrice;
+            this.quantity = quantity;
+            this.subtotal = subtotal;
+            this.paysTaxes = paysTaxes;
+        }
+
+        public ObjectId  getmenuItemld() {
+            return menuItemld;
+        }
+
+        public void setmenuItemld(ObjectId menuItemld) {
+            this.menuItemld = menuItemld;
+        }
+
+        public String getmenuItemName() {
+            return menuItemName;
+        }
+
+        public void setmenuItemName(String menuItemName) {
+            this.menuItemName = menuItemName;
+        }
+
+        public BigDecimal getindividualPrice() {
+            return individualPrice;
+        }
+
+        public void setindividualPrice(BigDecimal individualPrice) {
+            this.individualPrice= individualPrice;
+        }
+
+        public int  getquantity() {
+            return quantity;
+        }
+
+        public void setquantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public BigDecimal getsubtotal() {
+            return subtotal;
+        }
+
+        public void setsubtotal(BigDecimal subtotal) {
+            this.subtotal = subtotal;
+        } 
+        public boolean getpaysTaxes() {
+            return paysTaxes;
+        }
+
+        public void setpaysTaxes(boolean paysTaxes) {
+            this.paysTaxes = paysTaxes;
+        }
     
-}
-public InvoiceItem(ObjectId menuItemld, String menuItemName,BigDecimal individualPrice,int quantity, BigDecimal subtotal, boolean paysTaxes ) {
-        this.menuItemld = menuItemld;
-        this.menuItemName = menuItemName;
-        this.individualPrice= individualPrice;
-        this.quantity = quantity;
-        this.subtotal = subtotal;
-        this.paysTaxes = paysTaxes;
-        
     }
-
-    public ObjectId  getmenuItemld() {
-        return menuItemld;
-    }
-
-    public void setmenuItemld(ObjectId menuItemld) {
-        this.menuItemld = menuItemld;
-    }
-
-    public String getmenuItemName() {
-        return menuItemName;
-    }
-
-    public void setmenuItemName(String menuItemName) {
-        this.menuItemName = menuItemName;
-    }
-
-    public BigDecimal getindividualPrice() {
-        return individualPrice;
-    }
-
-    public void setindividualPrice(BigDecimal individualPrice) {
-        this.individualPrice= individualPrice;
-    }
-
-    public int  getquantity() {
-        return quantity;
-    }
-
-    public void setquantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getsubtotal() {
-        return subtotal;
-    }
-
-    public void setsubtotal(boolean subtotal) {
-        this.subtotal = subtotal;
-    } 
-    public boolean getpaysTaxes() {
-        return paysTaxes;
-    }
-
-    public void setpaysTaxes(boolean paysTaxes) {
-        this.paysTaxes = paysTaxes;
-    }
-    
-    
-    
-}
   
 }
 

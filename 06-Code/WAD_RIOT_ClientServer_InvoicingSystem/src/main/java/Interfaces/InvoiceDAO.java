@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
  */
 public interface InvoiceDAO {
     public ArrayList<Invoice> listInvoices();
-    public Invoice listInvoice(ObjectId id);
+    public Invoice listInvoice(String id);
     public boolean addInvoice(Invoice invoice);
     public boolean emailInvoiceToClient(Invoice invoice);
 }

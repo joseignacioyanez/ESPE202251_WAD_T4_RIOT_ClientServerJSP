@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
  */
 public class Client {
     ObjectId _id;
+    String idCard;
     String name;
     String address;
     String cellphone;
@@ -66,6 +67,14 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
     
     

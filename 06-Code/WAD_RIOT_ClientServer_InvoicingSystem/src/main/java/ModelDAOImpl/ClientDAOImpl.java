@@ -6,7 +6,6 @@ package ModelDAOImpl;
 
 import Interfaces.ClientDAO;
 import Model.Client;
-import Model.GsonUtils;
 import MongoDBConnection.MongoDBConnection;
 import com.google.gson.Gson;
 import com.mongodb.client.FindIterable;

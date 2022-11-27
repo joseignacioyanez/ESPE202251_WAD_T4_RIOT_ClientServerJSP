@@ -41,19 +41,21 @@ public class MenuItemDAOImpl implements MenuItemDAO{
             menuItemDBResult = database.getCollection("menuItems");   
             FindIterable<Document> allMenuItemsDocuments = menuItemDBResult.find();
             
-            System.out.println(allMenuItemsDocuments);
+            System.out.println("Menu Items All:" + allMenuItemsDocuments);
+            System.out.println(allMenuItemsDocuments.first().toJson());
             
             for (Document menuItemResult : allMenuItemsDocuments)
             {
                 Gson gsonMapperToObject = new Gson();
                 menuItem = gsonMapperToObject.fromJson(menuItemResult.toJson(), MenuItem.class);
                 
+                System.out.println(menuItemResult.toJson());
+                
                 // Try changing the id attribute with the substring from the JSON response
                 String menuItemResultInJson = menuItemResult.toJson();
                 String strippedOidFromJson = menuItemResultInJson.substring(18, 42);
                 menuItem.setId(new ObjectId(strippedOidFromJson));              
-                
-                
+                                
                 menuItemsList.add(menuItem);
             }
             
@@ -64,48 +66,19 @@ public class MenuItemDAOImpl implements MenuItemDAO{
     }
     
     @Override
-    public MenuItem listMenuItem(ObjectId id) {
-        try {
-            menuItemDBResult = database.getCollection("menuItems");   
-            System.out.println("Got it through the users collection");
-            Document menuItemSearched = menuItemDBResult.find(Filters.eq("_id", id.toString())).first();
-            System.out.println("found!");
-            
-            System.out.println(menuItemSearched);
-            
-            Gson gsonMapperToObject = new Gson();
-            menuItem = gsonMapperToObject.fromJson(menuItemSearched.toJson(), MenuItem.class);
-            
-            // Try changing the id attribute with the substring from the JSON response
-            String menuItemResultInJson = menuItemSearched.toJson();
-            String strippedOidFromJson = menuItemResultInJson.substring(18, 42);
-            menuItem.setOidString(strippedOidFromJson);
-            
-            System.out.println(menuItem);
-
-        } catch (Exception e) {
-            System.out.println("Could not get the user information " + e);
-        }
-        
-        return menuItem;
-    }
-
-    @Override
-    public MenuItem listMenuItem(String id) {
+    public MenuItem listMenuItem(String code){
         try {
             menuItemDBResult = database.getCollection("menuItems");   
             System.out.println("Got the menuitem collection");
             
-            System.out.println(id);
+            System.out.println(code);
                          
-            Document menuItemSearched = menuItemDBResult.find(eq("_id", new ObjectId(id))).first();
+            Document menuItemSearched = menuItemDBResult.find(eq("code", code)).first();
             
-            System.out.println("User Searched JSON: " + menuItemSearched);
             
             Gson gsonMapperToObject = new Gson();
             menuItem = gsonMapperToObject.fromJson(menuItemSearched.toJson(), MenuItem.class);
             
-            System.out.println("Converted to Object: "+ menuItem);
 
         } catch (Exception e) {
             System.out.println("Could not get the menuitem information " + e);
@@ -128,7 +101,7 @@ public class MenuItemDAOImpl implements MenuItemDAO{
                     .append("code", menuitem.getCode())
                     .append("category", menuitem.getCategory())
                     .append("name", menuitem.getName())
-                    .append("price", menuitem.getPrice())
+                    .append("price", menuitem.getPrice().toString())
                     .append("paysTaxes", menuitem.getPaysTaxes()));                    
             
             System.out.println("Success! Inserted document id: " + result.getInsertedId());
@@ -158,7 +131,7 @@ public class MenuItemDAOImpl implements MenuItemDAO{
                     Updates.set("status", menuitem.getStatus()),
                     Updates.set("category", menuitem.getCategory()),
                     Updates.set("name", menuitem.getName()),
-                    Updates.set("price", menuitem.getPrice()),
+                    Updates.set("price", menuitem.getPrice().toString()),
                     Updates.set("paysTaxes", menuitem.getPaysTaxes())
             );
             

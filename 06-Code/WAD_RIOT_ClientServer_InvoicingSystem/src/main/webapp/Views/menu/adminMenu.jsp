@@ -37,26 +37,14 @@
        
                 <form action="Controller" method="post">
                     <div class="row  d-flex justify-content-center mt-5 mb-5">
-<<<<<<< HEAD
-                        
-                        <button type='submit' name='action' value='adminUsers'  class="btn btn-info col-4 ms-1 me-3">Administrar Usuarios</button>
-                        <button type='submit' name='action' value='adminMenuItems'  class="btn btn-info col-4 ms-1 me-3">Administrar Menú</button>
-<<<<<<< HEAD
-                        <button type='submit' name='action' value='adminClients'  class="btn btn-info col-4 ms-1 me-3">Administrar Clientes</button>
-                        <button type='submit' name='action' value='adminFacturas'  class="btn btn-info col-4 ms-1 me-3">Administrar Facturas</button>
-=======
-                    <button type='submit' name='action' value='adminClients'  class="btn btn-info col-4 ms-1 me-3">Administrar Clientes</button>
-                        <button type='submit' name='action' value='adminInvoices'  class="btn btn-info col-4 ms-1 me-3">Administrar Facturas</button>
-                    
-=======
+
                         <button type='submit' name='action' value='adminUsers'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-people-fill me-3"></i>Administrar Usuarios</button>
                         <button type='submit' name='action' value='adminMenuItems'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-book me-3"></i>Administrar Menú</button>
                     </div>
                     <div class="row  d-flex justify-content-center mt-5 mb-5">
                         <button type='submit' name='action' value='adminClients'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-people me-3"></i>Administrar Clientes</button>
                         <button type='submit' name='action' value='adminFacturas'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-receipt me-3"></i>Administrar Facturas</button>
->>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
->>>>>>> ef5166566f708a5fd92fb88da6da78ddaf1fec62
+
                     </div>
                 </form>
                 

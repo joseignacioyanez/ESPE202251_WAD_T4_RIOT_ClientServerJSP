@@ -26,7 +26,7 @@
         <form action="Controller" method="post">
             
             <div class="row justify-content-evenly mb-4">
-                <button name="action" value="adminMenu" class="btn btn-secondary col-3">Cancelar</button>
+                <button name="action" value="adminMenuItems" class="btn btn-secondary col-3">Cancelar</button>
             </div>
             <!-- Error Message -->
             <%
@@ -37,14 +37,12 @@
             
             <%
                 MenuItemDAOImpl menuItemDAO = new MenuItemDAOImpl();
-                System.out.println("");
-                String idString = request.getParameter("id");
+                String code = request.getParameter("code");
                         
-                MenuItem menuItem = menuItemDAO.listMenuItem(idString);
+                MenuItem menuItem = menuItemDAO.listMenuItem(code);
                 
             %>
             
-            <input type="text" id="code" name="code" hidden class="form-control" value="<%= idString%>"></input>
             
             <div class="row form-group mt-2">
                  <label for="status"class="col-sm-3 col-form-label" >Estado:</label>
@@ -59,7 +57,7 @@
             <div class="row form-group mt-2">
                 <label for="code" class="col-sm-3 col-form-label">Código:</label>
                 <div class="col-sm-9">
-                    <input type="text" id="code" name="code" class="form-control" value=""></input>
+                    <input type="text" id="code" name="code" class="form-control" value="<%= code %>" readonly></input>
                 </div>
             </div>
             <div class="row form-group mt-2">
@@ -75,7 +73,7 @@
             <div class="row form-group mt-2">
                 <label for="name" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
-                    <input type="text" id="name" name="name" readonly="readonly" class="form-control" value="<%= menuItem.getName()%>"></input>
+                    <input type="text" id="name" name="name" class="form-control" value="<%= menuItem.getName()%>"></input>
                 </div>
             </div>
             
@@ -87,17 +85,17 @@
             </div>                
             
            <div class="row form-group mt-2">
-                 <label for="paytaxes"class="col-sm-3 col-form-label" >IVA:</label>
+                 <label for="paysTaxes"class="col-sm-3 col-form-label" >IVA:</label>
                  <div class="col-sm-9">
-                    <select id="paytaxes" name="paytaxes"class="form-select">
+                    <select id="paysTaxes" name="paysTaxes"class="form-select">
                         <option selected></option>
                         <option value="yes">Si</option>
-                        <option value="no">no</option>
+                        <option value="no">No</option>
                     </select>
                  </div>            
             
             <div class="row justify-content-center mt-4">          
-                <button type="submit" name="action" value="adminMenuItems" class="btn btn-success col-3">Confirmar</button>
+                <button type="submit" name="action" value="updateMenuItem" class="btn btn-success col-3">Confirmar</button>
             </div>
         </form>
     </div>

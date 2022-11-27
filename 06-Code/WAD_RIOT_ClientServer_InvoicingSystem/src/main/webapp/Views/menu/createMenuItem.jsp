@@ -76,7 +76,7 @@
                     <select id="paysTaxes" name="paysTaxes"class="form-select">
                         <option selected></option>
                         <option value="yes">Si</option>
-                        <option value="no">no</option>
+                        <option value="no">No</option>
                     </select>
                  </div>
             </div>                      

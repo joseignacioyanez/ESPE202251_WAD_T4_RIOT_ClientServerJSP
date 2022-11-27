@@ -66,7 +66,7 @@
                                     <td class="text-center"><%= menuItem.getName()%></td>
                                     <td class="text-center">
                                         <form action="Controller" method="post">
-                                            <input name="id" value="<%= menuItem.getCode()%>" type="hidden">
+                                            <input name="code" value="<%= menuItem.getCode()%>" type="hidden">
                                             <button name="action" value="goToUpdateMenuItemView" class="btn btn-warning">
                                                 Editar
                                             </button>  
@@ -74,7 +74,7 @@
                                     </td>
                                     <td class="text-center">
                                         <form action="Controller" method="post">
-                                            <input name="id" value="<%= menuItem.getCode()%>" type="hidden">
+                                            <input name="code" value="<%= menuItem.getCode()%>" type="hidden">
                                             <button name="action" value="deleteMenuItem" class="btn btn-danger">
                                                 Eliminar
                                             </button>

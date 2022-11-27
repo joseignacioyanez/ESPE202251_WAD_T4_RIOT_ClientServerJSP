@@ -28,7 +28,7 @@
                 <h1 class="text-center">Usuarios</h1>
                 <form action="Controller" method="post">
                     <div class="row justify-content-evenly">
-                        <button type="submit" name="action" value="adminUsers" class="btn btn-secondary col-3 text-center">Cancelar</button>
+                        <button type="submit" name="action" value="adminMenu" class="btn btn-secondary col-3 text-center">Cancelar</button>
                         <button type='submit' name="action" value="goToCreateUserView" class="btn btn-success col-3 text-center">Crear Usuario</button>
                     </div>
                     </form>

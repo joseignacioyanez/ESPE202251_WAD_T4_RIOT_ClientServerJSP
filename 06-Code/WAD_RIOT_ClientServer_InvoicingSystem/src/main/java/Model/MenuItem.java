@@ -86,12 +86,4 @@ public class MenuItem {
         this.paysTaxes = paysTaxes;
     }  
 
-    public void setOidString(String strippedOidFromJson) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String toJson() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
   }

@@ -15,8 +15,7 @@ import org.javatuples.Pair;
  */
 public interface MenuItemDAO {
     public ArrayList<MenuItem> listMenuItems();
-    public MenuItem listMenuItem(ObjectId id);
-    public MenuItem listMenuItem(String menuitemname);
+    public MenuItem listMenuItem(String code);
     public boolean addMenuItem(MenuItem menuitem);
     public boolean updateMenuItem(MenuItem menuitem);
     public boolean deleteMenuItem(String code);

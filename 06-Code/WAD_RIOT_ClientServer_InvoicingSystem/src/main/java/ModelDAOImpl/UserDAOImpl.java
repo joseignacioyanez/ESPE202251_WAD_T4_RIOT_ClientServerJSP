@@ -100,7 +100,7 @@ public class UserDAOImpl implements UserDAO{
             usersDBResult = database.getCollection("users");   
             System.out.println("Got the users collection");
             
-            System.out.println(id);
+            System.out.println(id); 
                          
             Document userSearched = usersDBResult.find(eq("_id", new ObjectId(id))).first();
             
@@ -255,9 +255,6 @@ public class UserDAOImpl implements UserDAO{
             answerAndObjectId = Pair.with(false, empty);
             
             return answerAndObjectId;
-        }
-
-        
-        
+        }        
     }
 }

@@ -13,7 +13,7 @@ public class User {
     private String email;
     private String username;
     private String passwordHash;
-    private String type; //admin or cashier
+    private String type; 
 
     public User() {
     }

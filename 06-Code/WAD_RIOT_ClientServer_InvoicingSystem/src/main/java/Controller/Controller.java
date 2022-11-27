@@ -1,9 +1,12 @@
 package Controller;
 
+import Model.MenuItem;
 import Model.User;
+import ModelDAOImpl.MenuItemDAOImpl;
 import ModelDAOImpl.UserDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,13 +31,21 @@ public class Controller extends HttpServlet {
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
     String createUserViewRoute = "Views/users/createUser.jsp";
+    String menuItemRoute = "Views/menu/menuItem.jsp";
+    String adminMenuItemsRoute = "Views/menu/adminMenuItems.jsp";
+    String createMenuItemViewRoute= "Views/menu/createMenuItem.jsp";
+    String updatMenuItemViewRoute = "Views/menu/updateMenuItem.jsp";
+    
     /* TODO  Routes to Views*/
     
     // Objects
     User user = new User();
+    MenuItem menuItem = new MenuItem();
     
     // DAOs
     UserDAOImpl userDAO = new UserDAOImpl();
+    MenuItemDAOImpl menuItemDAO = new MenuItemDAOImpl ();
+    
     
         
 
@@ -155,16 +166,30 @@ public class Controller extends HttpServlet {
                     viewToSend = "";
                 }
             break;
+            case "goToCreateMenuItemView":
+                viewToSend = createMenuItemViewRoute;
+            break;
+            /*case "updateMenuItem":
+                viewToSend =
+            break;*/
+            case "adminMenuItems":
+                viewToSend= adminMenuItemsRoute;
+            break;
             case "adminMenu":
                 viewToSend = adminMenuRoute;
             break;
             case "adminUsers":
                 viewToSend = adminUsersRoute;
             break;
+            case "goToUpdateMenuItemView":
+                request.setAttribute("id", request.getParameter("id"));
+                viewToSend = updatMenuItemViewRoute;
+            break;
             case "goToUpdateUserView" :
                 request.setAttribute("id", request.getParameter("id"));
                 viewToSend = updateUserViewRoute;
-            break;
+            break;  
+            
             case "updateUser":
                 System.out.println("request: "+request.getParameterMap().toString());
                 
@@ -270,10 +295,115 @@ public class Controller extends HttpServlet {
                     viewToSend = adminUsersRoute;
                 }
             break;
+            case "createProduct":
+                MenuItem newmenuItem = new MenuItem();
+                newmenuItem.setStatus(request.getParameter("status"));
+                newmenuItem.setCode(request.getParameter("code"));
+                newmenuItem.setCategory(request.getParameter("category"));
+                newmenuItem.setName(request.getParameter("name"));
+                newmenuItem.setPrice(new BigDecimal(request.getParameter("price")));
+                newmenuItem.setPaysTaxes(request.getParameter("paysTaxes"));
+                
+                boolean menuItemAdded = menuItemDAO.addMenuItem(newmenuItem);
+                if(menuItemAdded){
+                    request.setAttribute("success", "Procut creado exitosamente");
+                    viewToSend = adminMenuItemsRoute;
+                }else{
+                    request.setAttribute("error", "No se pudo crear el Product");
+                    viewToSend = adminMenuItemsRoute;
+                }
+            break;
+            case "deleteMenuItem":
+                String codeToDelete = request.getParameter("code");
+                boolean delete = menuItemDAO.deleteMenuItem(codeToDelete);
+                if(delete){
+                    request.setAttribute("success", "producto eliminado exitosamente");
+                    viewToSend = adminMenuItemsRoute;
+                }else{
+                    request.setAttribute("error", "No se pudo eliminar el producto");
+                    viewToSend = adminMenuItemsRoute;
+                }
+            break;
+            case "updateMenuItem":
+                // Retrieve MenuItem from DB to edit with new data
+                String code = request.getParameter("code");
+                MenuItem menuItem = menuItemDAO.listMenuItem(code);
+                String codeWeb = request.getParameter("code");
+                String codeDB = menuItem.getCode();
+                System.out.println("Code Web: " + codeWeb);
+                System.out.println("Code DB: " + codeDB);
+                   if(codeWeb.equals(codeDB))
+                {
+                    System.out.println("Both code are equal");
+                    // Update user in DB
+                    boolean updated = false;
+                    try {
+                        // Copy to a user
+                        String statusEntered = request.getParameter("status");
+                        if (statusEntered.equals("active")||statusEntered.equals("inactive")) {
+                            menuItem.setStatus(request.getParameter("status"));
+                        }
+                        else
+                        {
+                            request.setAttribute("error","Estado del producto incorrecto");
+                            viewToSend = adminMenuItemsRoute;
+                            break;  
+                        }
+                        menuItem.setCode(request.getParameter("code"));
+                        String categotyEntered = request.getParameter("status");
+                        if (categotyEntered.equals("product")||categotyEntered.equals("send")) {
+                            menuItem.setCategory(request.getParameter("category"));
+                        }
+                        else
+                        {
+                            request.setAttribute("error","Categoría incorrecto");
+                            viewToSend = adminMenuItemsRoute;
+                            break;  
+                        }
+                        menuItem.setName(request.getParameter("name"));
+                        menuItem.setPrice(new BigDecimal(request.getParameter("price")));
+                        String paysTaxesEntered = request.getParameter("paysTaxes");
+                        if (categotyEntered.equals("yes")||paysTaxesEntered.equals("no")) {
+                            menuItem.setCategory(request.getParameter("paysTaxes"));
+                        }
+                        else
+                        {
+                            request.setAttribute("error","IVA incorrecto");
+                            viewToSend = adminMenuItemsRoute;
+                            break;  
+                        }
+                        updated = menuItemDAO.updateMenuItem(menuItem);
+                        
+                    } catch (Exception e) {
+                        System.out.println("Error when Updating MenuItem in DB");
+                    }
+                    
+                    if (!updated){
+                        request.setAttribute("error", "No se modificó el producto exitosamente");
+                        viewToSend = adminUsersRoute;
+                        break;
+                    }
+                    else if (updated){
+                        // Confirmation message
+                        request.setAttribute("success", "producto modificado exitosamente");
+                        viewToSend = adminUsersRoute;
+                        break;
+                    }
+                }
+                // Else, the user changed the HTML
+                else {
+                    request.setAttribute("error", "El Nombre de Usuario no coincide con los Datos");
+                    viewToSend = adminUsersRoute;
+                    System.out.println("The Client changed the HTML, he is vivo");
+                    break;
+                }
+                    
+        
+            break;
             default:
                 viewToSend = "";
         }
-        
+              
         
         
         System.out.println("View to Send is: " + viewToSend);

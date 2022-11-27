@@ -17,9 +17,9 @@ public class Invoice {
 
     
     private ObjectId _id;
-    private LocalDate invoiceDate;
+    private String invoiceDate;
     private int invoiceNumber;
-    private String clientlDCard;
+    private String clientIDCard;
     private boolean orderToGo;
     private String clientName;
     private String clientEmail;
@@ -33,11 +33,11 @@ public class Invoice {
     public Invoice() {
     }
     
-    public Invoice(ObjectId id,LocalDate invoiceDate, int invoiceNumber, String clientlDCard, boolean orderToGo, String clientName, String clientEmail,BigDecimal subtotalInvoice,BigDecimal totalTaxesInvoice, BigDecimal totalInvoice, String paymentMethod, InvoiceItem invoicelItems) {
+    public Invoice(ObjectId id,String invoiceDate, int invoiceNumber, String clientlDCard, boolean orderToGo, String clientName, String clientEmail,BigDecimal subtotalInvoice,BigDecimal totalTaxesInvoice, BigDecimal totalInvoice, String paymentMethod, InvoiceItem invoicelItems) {
         this._id = id;
         this.invoiceDate = invoiceDate;
         this.invoiceNumber = invoiceNumber;
-        this.clientlDCard = clientlDCard;
+        this.clientIDCard = clientlDCard;
         this.orderToGo = orderToGo;
         this.clientName = clientName;
         this.clientEmail = clientEmail;
@@ -56,11 +56,11 @@ public class Invoice {
         this._id = id;
     }
 
-    public LocalDate getinvoiceDate() {
+    public String getinvoiceDate() {
         return invoiceDate;
     }
 
-    public void setinvoiceDate(LocalDate invoiceDate) {
+    public void setinvoiceDate(String invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
 
@@ -72,13 +72,14 @@ public class Invoice {
         this.invoiceNumber = invoiceNumber;
     }
 
-    public String  getclientlDCard() {
-        return clientlDCard;
+    public String getClientIdCard() {
+        return clientIDCard;
     }
 
-    public void setclientlDCard(String clientlDCard) {
-        this.clientlDCard = clientlDCard;
+    public void setClientIdCard(String clientIdCard) {
+        this.clientIDCard = clientIdCard;
     }
+
 
     public boolean getorderToGo() {
         return orderToGo;

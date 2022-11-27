@@ -438,6 +438,10 @@ public class Controller extends HttpServlet {
                     break;
                 }
             break;
+            case "updateInvoice":
+                viewToSend = adminInvoiceViewRoute;
+            
+            break;
             default:
                 viewToSend = "";
             

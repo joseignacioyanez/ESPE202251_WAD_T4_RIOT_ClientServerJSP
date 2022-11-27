@@ -37,7 +37,6 @@
             
             <%
                 InvoiceDAOImpl InvoiceDAO = new InvoiceDAOImpl();
-                System.out.println("Llegue aqui");
                 String idString = request.getParameter("id");
                         
                 Invoice invoice = InvoiceDAO.listInvoice(idString);
@@ -69,7 +68,7 @@
             <div class="row form-group mt-2">
                 <label for="clientIDCard" class="col-sm-3 col-form-label">Cedula:</label>
                 <div class="col-sm-9">
-                    <input type="string" id="clientIDCard" name="ID Card" readonly="readonly" class="form-control" value="<%= invoice.getclientlDCard() %>"></input>
+                    <input type="string" id="clientIDCard" name="ID Card" readonly="readonly" class="form-control" value="<%= invoice.getClientIdCard()  %>"></input>
                 </div>
             </div>
             

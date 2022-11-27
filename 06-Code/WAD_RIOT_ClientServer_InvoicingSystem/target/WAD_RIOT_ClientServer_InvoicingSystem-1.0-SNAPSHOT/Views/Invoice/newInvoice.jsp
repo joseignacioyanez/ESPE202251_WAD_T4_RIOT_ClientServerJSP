@@ -107,8 +107,8 @@
     <body>
         <!-- Alert if client does not exist -->
         <%
-            String msg=(String)request.getAttribute("errorClientDoesNotExist");  
-            if(msg!=null)
+            String msgErr=(String)request.getAttribute("errorClientDoesNotExist");  
+            if(msgErr!=null)
             out.println("<script>window.alert('Este usuario no existe, verifique la identificación o cree un cliente nuevo')</script>");
         %>
         

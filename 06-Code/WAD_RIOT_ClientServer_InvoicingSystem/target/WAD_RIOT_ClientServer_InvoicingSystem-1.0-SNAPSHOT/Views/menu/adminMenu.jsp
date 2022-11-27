@@ -43,7 +43,7 @@
                     </div>
                     <div class="row  d-flex justify-content-center mt-5 mb-5">
                         <button type='submit' name='action' value='adminClients'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-people me-3"></i>Administrar Clientes</button>
-                        <button type='submit' name='action' value='adminFacturas'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-receipt me-3"></i>Administrar Facturas</button>
+                        <button type='submit' name='action' value='adminInvoices'  class="btn btn-info col-4 ms-1 me-3"><i class="bi bi-receipt me-3"></i>Administrar Facturas</button>
 
                     </div>
                 </form>

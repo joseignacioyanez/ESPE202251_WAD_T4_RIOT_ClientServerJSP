@@ -41,6 +41,8 @@
                     <div class="row  d-flex justify-content-center mt-5 mb-5">
                         <button type='submit' name='action' value='adminUsers'  class="btn btn-info col-4 ms-1 me-3">Administrar Usuarios</button>
                         <button type='submit' name='action' value='adminMenuItems'  class="btn btn-info col-4 ms-1 me-3">Administrar Menú</button>
+                        <button type='submit' name='action' value='adminClients'  class="btn btn-info col-4 ms-1 me-3">Administrar Clientes</button>
+                        <button type='submit' name='action' value='adminFacturas'  class="btn btn-info col-4 ms-1 me-3">Administrar Facturas</button>
                     </div>
                 </form>
                 

@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
  */
 public class User {
     private ObjectId _id;
+    private String oidString;
     private String fullName;
     private String email;
     private String username;
@@ -71,6 +72,14 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getOidString() {
+        return oidString;
+    }
+
+    public void setOidString(String oidString) {
+        this.oidString = oidString;
     }
     
     

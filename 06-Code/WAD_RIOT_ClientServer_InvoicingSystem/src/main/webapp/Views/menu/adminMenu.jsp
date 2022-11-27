@@ -28,8 +28,10 @@
                     <h1 class="col">Menú del Administrador</h1>
                 </div>
                 <div class="row  d-flex justify-content-center mt-5 mb-5">
-                    <input type="submit" value="Cerrar Sesión" class="btn btn-danger col-4">
-                </div>
+                    <form action="Controller" method="post" class="row  d-flex justify-content-center">
+                        <button type="submit" value="logout" name='action' class="btn btn-danger col-4">Cerrar Sesión</button>
+                    </form>
+                    </div>
                 <div class="text-center mt-3 mb-3">
                     <img src="images/people.png" alt="Users" height=200px class="ms-1 me-3"/>
                     <img src="images/menu.png" alt="Users" height=200px class="ms-3 me-1"/>
@@ -37,8 +39,8 @@
                 
                 <form action="Controller" method="post">
                     <div class="row  d-flex justify-content-center mt-5 mb-5">
-                        <button type='submit' action="Controlador" name='action' value='adminUsers'  class="btn btn-info col-4 ms-1 me-3">Administrar Usuarios</button>
-                        <button type='submit' action="Controlador" name='action' value='adminMenuItems'  class="btn btn-info col-4 ms-1 me-3">Administrar Menú</button>
+                        <button type='submit' name='action' value='adminUsers'  class="btn btn-info col-4 ms-1 me-3">Administrar Usuarios</button>
+                        <button type='submit' name='action' value='adminMenuItems'  class="btn btn-info col-4 ms-1 me-3">Administrar Menú</button>
                     </div>
                 </form>
                 

@@ -15,7 +15,7 @@ public interface UserDAO {
     public User listUser(String username);
     public boolean addUser(User user);
     public boolean updateUser(User user);
-    public boolean deleteUser(ObjectId id);
+    public boolean deleteUser(String oid);
     /* Business Rules - To secure the access to the system,
     no password will be saved as text but as the hash of a password.
     This hash will be verified with the hash of the opassword a user enters at Login */

@@ -13,8 +13,14 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.javatuples.Pair;
 
@@ -45,6 +51,13 @@ public class UserDAOImpl implements UserDAO{
             {
                 Gson gsonMapperToObject = new Gson();
                 user = gsonMapperToObject.fromJson(userResult.toJson(), User.class);
+                
+                // Try changing the id attribute with the substring from the JSON response
+                String userResultInJson = userResult.toJson();
+                String strippedOidFromJson = userResultInJson.substring(18, 42);
+                user.setOidString(strippedOidFromJson);
+                
+                
                 usersList.add(user);
             }
             
@@ -67,6 +80,11 @@ public class UserDAOImpl implements UserDAO{
             Gson gsonMapperToObject = new Gson();
             user = gsonMapperToObject.fromJson(userSearched.toJson(), User.class);
             
+            // Try changing the id attribute with the substring from the JSON response
+            String userResultInJson = userSearched.toJson();
+            String strippedOidFromJson = userResultInJson.substring(18, 42);
+            user.setOidString(strippedOidFromJson);
+            
             System.out.println(user);
 
         } catch (Exception e) {
@@ -78,28 +96,115 @@ public class UserDAOImpl implements UserDAO{
     
     @Override
     public User listUser(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody        
+        try {
+            usersDBResult = database.getCollection("users");   
+            System.out.println("Got the users collection");
+            
+            System.out.println(id);
+                         
+            Document userSearched = usersDBResult.find(eq("_id", new ObjectId(id))).first();
+            
+            System.out.println("User Searched JSON: " + userSearched);
+            
+            Gson gsonMapperToObject = new Gson();
+            user = gsonMapperToObject.fromJson(userSearched.toJson(), User.class);
+            
+            System.out.println("Converted to Object: "+ user);
+
+        } catch (Exception e) {
+            System.out.println("Could not get the user information " + e);
+        }
+        
+        return user;
     }
     
 
     @Override
     public boolean addUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        boolean inserted = false;
+        
+        ObjectId objectId = new ObjectId();
+        // Add user into DB
+        try {
+           
+            InsertOneResult result = database.getCollection("users").insertOne(
+                    new Document().append("_id", objectId)
+                    .append("fullName", user.getFullName())
+                    .append("username", user.getUsername())
+                    .append("email", user.getEmail())
+                    .append("passwordHash", user.getPasswordHash())
+                    .append("type", user.getType())
+                    .append("oid", objectId.toString()));
+            
+            System.out.println("Success! Inserted document id: " + result.getInsertedId());
+            inserted = true;
+        } catch (Exception e) {
+            System.err.println("Error when inserting new User: " + e);
+        }
+        
+        return inserted;
     }
 
     @Override
     public boolean updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String oid = user.getOidString();
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(user));
+        System.out.println("Try to update");
+        /* Code modified from MongoDB docs
+            https://www.mongodb.com/docs/drivers/java/sync/current/usage-examples/updateOne/
+        */
+        try {
+            // Send to DB
+            
+            Document query = new Document().append("oid", oid);
+            
+            Bson updates = Updates.combine(
+                    Updates.set("email", user.getEmail()),
+                    Updates.set("username", user.getUsername()),
+                    Updates.set("passwordHash", user.getPasswordHash()),
+                    Updates.set("type", user.getType())
+            );
+            
+            try {
+                UpdateResult result = database.getCollection("users").updateOne(query, updates);
+                System.out.println("Modified document count: " + result.getModifiedCount());
+                System.out.println("Upserted id: " + result.getUpsertedId()); // only contains a value when an upsert is performed
+            } catch (Exception e) {
+                System.err.println("Unable to update due to an error: " + e);
+                return false;
+            }
+            
+            
+        } catch (Exception e) {
+            System.err.println("Unable to update due to an error: " + e);
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public boolean deleteUser(ObjectId id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteUser(String oid) {
+        boolean deleted = false;
+        System.out.println("Oid of user too be deleted: " + oid);
+        Bson query = eq("oid", oid);
+        
+        try {
+            DeleteResult result = database.getCollection("users").deleteOne(query);
+            System.out.println("Deleted document count: " + result.getDeletedCount());
+            deleted = true;
+        } catch (Exception e) {
+            System.err.println("Error in deletion: " + e);
+        }
+        return deleted;
     }
 
     @Override
     public String hashPassword(String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+        System.out.println(password + "Password Hashed" + bcryptHashString);
+        return bcryptHashString;
     }
 
     @Override

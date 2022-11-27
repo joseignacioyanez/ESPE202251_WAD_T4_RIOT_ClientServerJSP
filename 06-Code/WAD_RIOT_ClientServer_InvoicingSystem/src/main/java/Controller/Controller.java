@@ -27,6 +27,7 @@ public class Controller extends HttpServlet {
     String adminMenuRoute = "Views/menu/adminMenu.jsp";
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
+    String createUserViewRoute = "Views/users/createUser.jsp";
     /* TODO  Routes to Views*/
     
     // Objects
@@ -98,8 +99,6 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        /* Code modified from Vivek, for AppEngine*/
-        response.setContentType("text/plain");
         
         // The path to the view that wll be sent based on action received
         String viewToSend = "";
@@ -162,6 +161,111 @@ public class Controller extends HttpServlet {
             case "goToUpdateUserView" :
                 request.setAttribute("id", request.getParameter("id"));
                 viewToSend = updateUserViewRoute;
+            break;
+            case "updateUser":
+                System.out.println("request: "+request.getParameterMap().toString());
+                
+                // Validate password fields
+                String password = request.getParameter("password");
+                String passwordRepeat = request.getParameter("passwordRepeat");
+                
+                if (!password.equals(passwordRepeat))
+                {
+                    // Send error
+                    request.setAttribute("error", "Los campos de contraseña no son iguales");
+                    viewToSend = adminUsersRoute;
+                    break;
+                }
+                
+                // Retrieve User from DB to edit with new data
+                String oid = request.getParameter("oid");
+                User user = userDAO.listUser(oid);
+                // Verify that the fullName has not been changed
+                String fullNameWeb = request.getParameter("fullName");
+                String fullNameDB = user.getFullName();
+                System.out.println("FullName Web: " + fullNameWeb);
+                System.out.println("FullNAme DB: " + fullNameDB);
+                if(fullNameWeb.equals(fullNameDB))
+                {
+                    System.out.println("Both fullNames are equal");
+                    // Update user in DB
+                    boolean updated = false;
+                    try {
+                        // Copy to a user
+                        user.setOidString(request.getParameter("oid"));
+                        user.setEmail(request.getParameter("email"));
+                        user.setUsername(request.getParameter("username"));
+                        String hashedPassword = userDAO.hashPassword(request.getParameter("password"));
+                        user.setPasswordHash(hashedPassword);
+                        
+                        String userTypeEntered = request.getParameter("userType");
+                        if (userTypeEntered.equals("cashier") || userTypeEntered.equals("admin"))
+                        {
+                            user.setType(request.getParameter("userType"));
+                        }
+                        else{
+                            // Send error
+                            request.setAttribute("error", "El tipo de Usuario es Incorrecto");
+                            viewToSend = adminUsersRoute;
+                            break;
+                        }
+                        
+                        updated = userDAO.updateUser(user);
+                        
+                    } catch (Exception e) {
+                        System.out.println("Error when Updating User in DB");
+                    }
+                    
+                    if (!updated){
+                        request.setAttribute("error", "No se modificó el usuario exitosamente");
+                        viewToSend = adminUsersRoute;
+                        break;
+                    }
+                    else if (updated){
+                        // Confirmation message
+                        request.setAttribute("success", "Usuario modificado exitosamente");
+                        viewToSend = adminUsersRoute;
+                        break;
+                    }
+                }
+                // Else, the user changed the HTML
+                else {
+                    request.setAttribute("error", "El Nombre de Usuario no coincide con los Datos");
+                    viewToSend = adminUsersRoute;
+                    System.out.println("The Client changed the HTML, he is vivo");
+                    break;
+                }
+                
+            break;
+            case "deleteUser":
+                String oidToDelete = request.getParameter("id");
+                boolean deleted = userDAO.deleteUser(oidToDelete);
+                if(deleted){
+                    request.setAttribute("success", "Usuario eliminado exitosamente");
+                    viewToSend = adminUsersRoute;
+                }else{
+                    request.setAttribute("error", "No se pudo eliminar el Usuario");
+                    viewToSend = adminUsersRoute;
+                }
+            break;
+            case "goToCreateUserView" :
+                viewToSend = createUserViewRoute;
+            break;
+            case "createUser":
+                User newUser = new User();
+                newUser.setFullName(request.getParameter("fullName"));
+                newUser.setEmail(request.getParameter("email"));
+                newUser.setPasswordHash(userDAO.hashPassword(request.getParameter("password")));
+                newUser.setUsername(request.getParameter("username"));
+                newUser.setType(request.getParameter("userType"));
+                boolean userAdded = userDAO.addUser(newUser);
+                if(userAdded){
+                    request.setAttribute("success", "Usuario creado exitosamente");
+                    viewToSend = adminUsersRoute;
+                }else{
+                    request.setAttribute("error", "No se pudo crear el Usuario");
+                    viewToSend = adminUsersRoute;
+                }
             break;
             default:
                 viewToSend = "";

@@ -28,8 +28,8 @@
                 <h1 class="text-center">Usuarios</h1>
                 <form action="Controller" method="post">
                     <div class="row justify-content-evenly">
-                        <button type="submit" name="action" value="" class="btn btn-secondary col-3 text-center">Cancelar</button>
-                        <button type='submit' name="action" value="createUser" class="btn btn-success col-3 text-center">Crear Usuario</button>
+                        <button type="submit" name="action" value="adminMenu" class="btn btn-secondary col-3 text-center">Cancelar</button>
+                        <button type='submit' name="action" value="goToCreateUserView" class="btn btn-success col-3 text-center">Crear Usuario</button>
                     </div>
                     </form>
             </div>
@@ -43,6 +43,19 @@
                                     <th class="text-center">Eliminar</th>
 				</thead>
                                 <tbody>
+                                <!-- Success at Update Message -->
+                                <%
+                                    String msg=(String)request.getAttribute("success");  
+                                    if(msg!=null)
+                                    out.println("<div class='alert alert-success'>"+msg+"</div>");
+                                %>
+                                <!-- Error at Update Message -->
+                                <%
+                                    String msgError=(String)request.getAttribute("error");  
+                                    if(msgError!=null)
+                                    out.println("<div class='alert alert-danger'>"+msgError+"</div>");
+                                %>
+                                    
                                 <%
                                     UserDAOImpl userDAO = new UserDAOImpl();
                                     ArrayList<User> usersList = userDAO.listUsers();
@@ -55,7 +68,7 @@
                                     <td class="text-center"><%= user.getUsername()%></td>
                                     <td class="text-center">
                                         <form action="Controller" method="post">
-                                            <input name="id" value="<%= user.getId() %>" type="hidden">
+                                            <input name="id" value="<%= user.getOidString() %>" type="hidden">
                                             <button name="action" value="goToUpdateUserView" class="btn btn-warning">
                                                 Editar
                                             </button>
@@ -63,7 +76,7 @@
                                     </td>
                                     <td class="text-center">
                                         <form action="Controller" method="post">
-                                            <input name="id" value="<%= user.getId().toHexString() %>" type="hidden">
+                                            <input name="id" value="<%= user.getOidString() %>" type="hidden">
                                             <button name="action" value="deleteUser" class="btn btn-danger">
                                                 Eliminar
                                             </button>

@@ -155,6 +155,9 @@ public class Controller extends HttpServlet {
                     viewToSend = "";
                 }
             break;
+            case "adminMenu":
+                viewToSend = adminMenuRoute;
+            break;
             case "adminUsers":
                 viewToSend = adminUsersRoute;
             break;

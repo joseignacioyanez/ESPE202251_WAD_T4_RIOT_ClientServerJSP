@@ -1,12 +1,14 @@
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/MongoDBConnection/MongoDBConnection.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/com/mycompany/wad_riot_clientserver_invoicingsystem/resources/JakartaEE8Resource.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Controller/Controller.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Model/TestBcrypt.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Interfaces/UserDAO.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/com/mycompany/wad_riot_clientserver_invoicingsystem/JakartaRestConfiguration.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Interfaces/InvoiceDAO.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/ModelDAOImpl/UserDAOImpl.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Model/User.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Model/Invoice.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Model/Client.java
-/Users/joseignacio/NetBeansProjects/WAD_RIOT_ClientServer_InvoicingSystem/src/main/java/Model/MenuItem.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\com\mycompany\wad_riot_clientserver_invoicingsystem\JakartaRestConfiguration.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\MenuItem.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\MongoDBConnection\MongoDBConnection.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\TestsMongoDB.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Interfaces\UserDAO.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\ModelDAOImpl\UserDAOImpl.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\com\mycompany\wad_riot_clientserver_invoicingsystem\resources\JakartaEE8Resource.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\Invoice.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\Client.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Interfaces\InvoiceDAO.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\User.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\TestObjectId.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Model\TestBcrypt.java
+C:\Users\mishe\Documents\Sexto Semestre\Web\Primer proyecto\ESPE202251_WAD_T4_RIOT_ClientServerJSP\06-Code\WAD_RIOT_ClientServer_InvoicingSystem\src\main\java\Controller\Controller.java

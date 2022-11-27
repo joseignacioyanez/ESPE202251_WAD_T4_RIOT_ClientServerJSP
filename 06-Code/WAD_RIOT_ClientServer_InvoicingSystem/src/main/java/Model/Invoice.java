@@ -27,6 +27,7 @@ public class Invoice {
     private BigDecimal totalTaxesInvoice;
     private BigDecimal totalInvoice;
     private String paymentMethod;
+    private String paymentState;
     private InvoiceItem invoicelItems;
  
     public Invoice() {
@@ -123,6 +124,16 @@ public class Invoice {
     public void setinvoicelItems(InvoiceItem invoicelItems) {
         this.invoicelItems = invoicelItems;
     }
+
+    public String getPaymentState() {
+        return paymentState;
+    }
+
+    public void setPaymentState(String paymentState) {
+        this.paymentState = paymentState;
+    }
+    
+    
     
     /*
         Nested class to store each item details in the Invoice
@@ -201,6 +212,7 @@ public class Invoice {
             this.paysTaxes = paysTaxes;
         }
     
+        
     }
   
 }

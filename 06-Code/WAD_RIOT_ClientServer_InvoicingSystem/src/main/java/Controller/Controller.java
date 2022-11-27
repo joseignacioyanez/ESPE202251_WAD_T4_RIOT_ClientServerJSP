@@ -23,7 +23,7 @@ public class Controller extends HttpServlet {
     /*Atributes*/
     String loginViewRoute = "";
     String confirmationRoute = "Views/new.jsp";
-    String invoicingViewRoute = "Views/Invoice/shii.html";
+    String invoicingViewRoute = "Views/Invoice/newInvoice.jsp";
     String adminMenuRoute = "Views/menu/adminMenu.jsp";
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
@@ -135,6 +135,8 @@ public class Controller extends HttpServlet {
                             viewToSend = adminMenuRoute;
                         }
                         else if(userType.equals("cashier")){
+                            //TEST
+                            request.setAttribute("errorClientDoesNotExist", "error");
                             viewToSend = invoicingViewRoute;
                         }
                     }

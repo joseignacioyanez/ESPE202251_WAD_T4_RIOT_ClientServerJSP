@@ -66,6 +66,8 @@ public class UserDAOImpl implements UserDAO{
             System.out.println("Could not get the user information " + e);
         }
         return usersList;
+        
+        
     }
 
     @Override

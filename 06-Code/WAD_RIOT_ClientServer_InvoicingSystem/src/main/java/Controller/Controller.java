@@ -136,9 +136,7 @@ public class Controller extends HttpServlet {
                         }
                         else if(userType.equals("cashier")){
                             viewToSend = invoicingViewRoute;
-                            break;
                         }
-                        
                     }
                     else
                     {
@@ -146,8 +144,6 @@ public class Controller extends HttpServlet {
                         request.setAttribute("error","Usuario o Contraseña Incorrectos");
                         viewToSend = "";
                     }
-                    
-                    
                 }
                 else{
                     System.out.println("User does not exist");
@@ -187,7 +183,7 @@ public class Controller extends HttpServlet {
                 String fullNameWeb = request.getParameter("fullName");
                 String fullNameDB = user.getFullName();
                 System.out.println("FullName Web: " + fullNameWeb);
-                System.out.println("FullNAme DB: " + fullNameDB);
+                System.out.println("FullName DB: " + fullNameDB);
                 if(fullNameWeb.equals(fullNameDB))
                 {
                     System.out.println("Both fullNames are equal");

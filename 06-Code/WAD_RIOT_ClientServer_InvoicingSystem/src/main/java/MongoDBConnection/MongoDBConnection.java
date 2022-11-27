@@ -33,36 +33,6 @@ public class MongoDBConnection {
                     .build();
             MongoClient mongoClient = MongoClients.create(settings);
             this.database = mongoClient.getDatabase("WAD_1_Invoicing_SantoPlacer");
-            
-            /* TEST
-            try {
-                // collection.find() returns Objects that have to be casted to Documents by default
-                //    but in the MongoDB docs, they cast all the collection to an Array of Documents Before, 
-                //    so we can always work with Documents
-                MongoCollection<Document> users = database.getCollection("users");
-                                
-                Bson projectionFields = Projections.fields(
-                        Projections.include("fullName", "email", "username", "passwordHash"));
-                
-                
-                Document firstUser = users.find(eq("username", "jiyf")).projection(projectionFields).first();
-                
-                
-                System.out.println(" first user as JSON is: \n" + firstUser.toJson());
-                System.out.println(" first user as Object is: \n" + firstUser);
-                
-                // Map JSON to Object with Gson
-                
-                Gson gson = new Gson();
-                User user = gson.fromJson(firstUser.toJson(), User.class);
-                
-                System.out.println("Como POJO:");
-                user.printUserDebug();
-                
-            } catch (Exception e) {
-                System.out.println("Could not find the users collection " + e);
-            }
-            */
         } catch (Exception e) {
             System.out.println("Could not connect to MongoDB Database " + e);
         }

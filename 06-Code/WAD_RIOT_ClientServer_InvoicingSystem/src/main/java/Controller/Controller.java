@@ -2,8 +2,13 @@ package Controller;
 
 import Model.Client;
 import Model.User;
+<<<<<<< HEAD
+import Model.Invoice;
+=======
 import ModelDAOImpl.ClientDAOImpl;
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
 import ModelDAOImpl.UserDAOImpl;
+import ModelDAOImpl.InvoiceDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -30,9 +35,14 @@ public class Controller extends HttpServlet {
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
     String createUserViewRoute = "Views/users/createUser.jsp";
+<<<<<<< HEAD
+    String adminInvoiceViewRoute = "Views/Invoice/adminInvoices.jsp";
+    String updateInvoiceViewRoute = "Views/Invoice/updateInvoice.jsp";;
+=======
     String adminClientsViewRoute = "Views/Clients/adminClients.jsp";
     String updateClientViewRoute = "Views/Clients/updateClient.jsp";
     String createClientViewRoute = "Views/Clients/createClient.jsp";
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
     /* TODO  Routes to Views*/
     
     // Objects
@@ -272,7 +282,20 @@ public class Controller extends HttpServlet {
                     request.setAttribute("error", "No se pudo crear el Usuario");
                     viewToSend = adminUsersRoute;
                 }
+            break; 
+            case "adminInvoices":
+                viewToSend = adminInvoiceViewRoute;    
             break;
+<<<<<<< HEAD
+            
+            case "goToUpdateInvoiceView" :
+                    String id = request.getParameter("id");
+                    request.setAttribute ("id", id);
+                    viewToSend = updateInvoiceViewRoute;
+            break;
+            
+                    
+=======
             case "adminClients":
                 viewToSend = adminClientsViewRoute;
             break;
@@ -338,6 +361,7 @@ public class Controller extends HttpServlet {
                     break;
                 }
             break;
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
             default:
                 viewToSend = "";
         }

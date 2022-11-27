@@ -1,6 +1,8 @@
 package Controller;
 
+import Model.Client;
 import Model.User;
+import ModelDAOImpl.ClientDAOImpl;
 import ModelDAOImpl.UserDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +30,9 @@ public class Controller extends HttpServlet {
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
     String createUserViewRoute = "Views/users/createUser.jsp";
+    String adminClientsViewRoute = "Views/Clients/adminClients.jsp";
+    String updateClientViewRoute = "Views/Clients/updateClient.jsp";
+    String createClientViewRoute = "Views/Clients/createClient.jsp";
     /* TODO  Routes to Views*/
     
     // Objects
@@ -35,6 +40,7 @@ public class Controller extends HttpServlet {
     
     // DAOs
     UserDAOImpl userDAO = new UserDAOImpl();
+    ClientDAOImpl clientDAO = new ClientDAOImpl();
     
         
 
@@ -161,6 +167,7 @@ public class Controller extends HttpServlet {
             break;
             case "goToUpdateUserView" :
                 request.setAttribute("id", request.getParameter("id"));
+                System.out.println("The id that comes from adminUsers and is going to be updated is: " + request.getParameter("id"));
                 viewToSend = updateUserViewRoute;
             break;
             case "updateUser":
@@ -266,6 +273,71 @@ public class Controller extends HttpServlet {
                 }else{
                     request.setAttribute("error", "No se pudo crear el Usuario");
                     viewToSend = adminUsersRoute;
+                }
+            break;
+            case "adminClients":
+                viewToSend = adminClientsViewRoute;
+            break;
+            case "goToUpdateClientView":
+                viewToSend = updateClientViewRoute;
+            break;
+            case "updateClient":
+                String idClientToUpdate = request.getParameter("id");
+                try {
+                    Client client = clientDAO.getClient(idClientToUpdate);
+                    
+                    // Correct the id
+                    client.setId(new ObjectId(idClientToUpdate));
+                    
+                    //Update Client with form fields
+                    client.setIdCard(request.getParameter("idCard"));
+                    client.setName(request.getParameter("name"));
+                    client.setAddress(request.getParameter("address"));
+                    client.setCellphone(request.getParameter("cellphone"));
+                    client.setEmail(request.getParameter("email"));
+                    
+                    
+                   // Update in DB
+                    boolean updated = clientDAO.updateClient(client);
+                    
+                    if (!updated){
+                        request.setAttribute("error", "No se modificó el Cliente exitosamente");
+                        viewToSend = adminClientsViewRoute;
+                        break;
+                    }
+                    else if (updated){
+                        // Confirmation message
+                        request.setAttribute("success", "Cliente modificado exitosamente");
+                        viewToSend = adminClientsViewRoute;
+                        break;
+                    }
+                    
+                } catch (Exception e) {
+                    System.out.println("Could not update the client to be updated " + e);
+                }
+            break;
+            case "goToCreateClientView":
+                viewToSend = createClientViewRoute;
+            break;
+            case "createClient":
+                Client client = new Client();
+                client.setName(request.getParameter("name"));
+                client.setIdCard(request.getParameter("idCard"));
+                client.setAddress(request.getParameter("address"));
+                client.setCellphone(request.getParameter("cellphone"));
+                client.setEmail(request.getParameter("email"));
+                boolean created = clientDAO.addClient(client);
+                
+                if (!created){
+                        request.setAttribute("error", "No se modificó el Cliente exitosamente");
+                        viewToSend = adminClientsViewRoute;
+                        break;
+                }
+                else if (created){
+                    // Confirmation message
+                    request.setAttribute("success", "Cliente creado exitosamente");
+                    viewToSend = adminClientsViewRoute;
+                    break;
                 }
             break;
             default:

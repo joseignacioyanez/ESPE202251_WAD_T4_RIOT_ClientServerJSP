@@ -1,7 +1,9 @@
 package Controller;
 
 import Model.User;
+import Model.Invoice;
 import ModelDAOImpl.UserDAOImpl;
+import ModelDAOImpl.InvoiceDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -28,6 +30,8 @@ public class Controller extends HttpServlet {
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
     String createUserViewRoute = "Views/users/createUser.jsp";
+    String adminInvoiceViewRoute = "Views/Invoice/adminInvoices.jsp";
+    String updateInvoiceViewRoute = "Views/Invoice/updateInvoice.jsp";;
     /* TODO  Routes to Views*/
     
     // Objects
@@ -269,7 +273,18 @@ public class Controller extends HttpServlet {
                     request.setAttribute("error", "No se pudo crear el Usuario");
                     viewToSend = adminUsersRoute;
                 }
+            break; 
+            case "adminInvoices":
+                viewToSend = adminInvoiceViewRoute;    
             break;
+            
+            case "goToUpdateInvoiceView" :
+                    String id = request.getParameter("id");
+                    request.setAttribute ("id", id);
+                    viewToSend = updateInvoiceViewRoute;
+            break;
+            
+                    
             default:
                 viewToSend = "";
         }

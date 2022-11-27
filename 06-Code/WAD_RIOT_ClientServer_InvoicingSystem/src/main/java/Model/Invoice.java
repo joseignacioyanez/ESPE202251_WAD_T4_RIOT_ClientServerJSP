@@ -28,6 +28,7 @@ public class Invoice {
     private BigDecimal totalInvoice;
     private String paymentMethod;
     private InvoiceItem invoicelItems;
+    private String paymentState;
  
     public Invoice() {
     }
@@ -123,6 +124,29 @@ public class Invoice {
     public void setinvoicelItems(InvoiceItem invoicelItems) {
         this.invoicelItems = invoicelItems;
     }
+    public BigDecimal gettotalTaxesInvoice() {
+        return totalTaxesInvoice;
+    }
+
+    public void settotalTaxesInvoice(BigDecimal totalTaxesInvoice) {
+        this.totalTaxesInvoice = totalTaxesInvoice;
+    }
+    public BigDecimal gettotalInvoice() {
+        return totalInvoice;
+    }
+
+    public void settotalInvoice(BigDecimal totalInvoice) {
+        this.totalInvoice = totalInvoice;
+    }
+
+    public String getPaymentState() {
+        return paymentState;
+    }
+
+    public void setPaymentState(String paymentState) {
+        this.paymentState = paymentState;
+    }
+    
     
     /*
         Nested class to store each item details in the Invoice

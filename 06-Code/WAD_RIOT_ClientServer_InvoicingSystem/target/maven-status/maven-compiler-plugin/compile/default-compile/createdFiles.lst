@@ -6,6 +6,7 @@ Model\Invoice.class
 Model\MenuItem.class
 Controller\Controller.class
 Model\TestsMongoDB.class
+ModelDAOImpl\InvoiceDAOImpl.class
 com\mycompany\wad_riot_clientserver_invoicingsystem\resources\JakartaEE8Resource.class
 Model\TestObjectId.class
 Model\User.class

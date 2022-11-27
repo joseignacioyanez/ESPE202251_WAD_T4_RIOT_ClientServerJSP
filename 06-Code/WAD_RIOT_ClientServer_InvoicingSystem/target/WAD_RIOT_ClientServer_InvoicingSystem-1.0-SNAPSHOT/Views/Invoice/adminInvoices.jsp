@@ -1,14 +1,12 @@
-
-%-- 
-    Document   : adminUsers
-    Created on : 23 nov. 2022, 14:27:23
-    Author     : mishe
+<%-- 
+    Document   : adminInvoices
+    Created on : 27 nov. 2022, 10:29:22
+    Author     : rafas
 --%>
 
-<%@page import="Model.User"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="ModelDAOImpl.UserDAOImpl"%>
-<%@page import="Interfaces.UserDAO"%>
+<%@page import="Model.Invoice"%>
+<%@page import="ModelDAOImpl.InvoiceDAOImpl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,18 +17,18 @@
                   rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" 
                   crossorigin="anonymous">
 
-	<title>Usuarios</title>
+	<title>Factura</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container mt-4">
             
             <div class="row justify-content-between mt-4 mb-4">
-                <h1 class="text-center">Usuarios</h1>
+                <h1 class="text-center">Factura</h1>
                 <form action="Controller" method="post">
                     <div class="row justify-content-evenly">
                         <button type="submit" name="action" value="adminMenu" class="btn btn-secondary col-3 text-center">Cancelar</button>
-                        <button type='submit' name="action" value="goToCreateUserView" class="btn btn-success col-3 text-center">Crear Usuario</button>
+                        <button type='submit' name="action" value="goToCreateInvoiceView" class="btn btn-success col-3 text-center">Crear Factura</button>
                     </div>
                     </form>
             </div>
@@ -38,10 +36,12 @@
 			<table class="table table-secondary">
 				<thead>
                                     <th class="text-center">Nombre</th>
+                                    <th class="text-center">Cedula</th>
                                     <th class="text-center">Email</th>
-                                    <th class="text-center">Usuario</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Fecha</th>
+                                    <th class="text-center">Total</th>
                                     <th class="text-center">Editar</th>
-                                    <th class="text-center">Eliminar</th>
 				</thead>
                                 <tbody>
                                 <!-- Success at Update Message -->
@@ -58,31 +58,29 @@
                                 %>
                                     
                                 <%
-                                    UserDAOImpl userDAO = new UserDAOImpl();
-                                    ArrayList<User> usersList = userDAO.listUsers();
-                                    for (User user : usersList){
+                                    InvoiceDAOImpl InvoiceDAO = new InvoiceDAOImpl();
+                                    ArrayList<Invoice> invoicesList = InvoiceDAO.listInvoices();
+                                    for (Invoice invoice : invoicesList){
                                         
                                 %>
                                 <tr>
-                                    <td class="text-center"><%= user.getFullName() %></td>
-                                    <td class="text-center"><%= user.getEmail()%></td>
-                                    <td class="text-center"><%= user.getUsername()%></td>
+                                    <td class="text-center"><%= invoice.getclientName() %></td>
+                                    <td class="text-center"><%= invoice.getclientlDCard() %></td>
+                                    <td class="text-center"><%= invoice.getclientEmail()%></td>
+                                    <td class="text-center"><%= invoice.getPaymentState() %></td>
+                                    <td class="text-center"><%= invoice.getinvoiceDate()%></td>
+                                    <td class="text-center"><%= invoice.gettotalInvoice()%></td>
+
+
                                     <td class="text-center">
                                         <form action="Controller" method="post">
-                                            <input name="id" value="<%= user.getOidString() %>" type="hidden">
-                                            <button name="action" value="goToUpdateUserView" class="btn btn-warning">
+                                            <input name="id" value="<%= invoice.getId().toString() %>" type="hidden">
+                                            <button name="action" value="goToUpdateInvoiceView" class="btn btn-warning">
                                                 Editar
                                             </button>
                                         </form>
                                     </td>
-                                    <td class="text-center">
-                                        <form action="Controller" method="post">
-                                            <input name="id" value="<%= user.getOidString() %>" type="hidden">
-                                            <button name="action" value="deleteInvoice" class="btn btn-danger">
-                                                Eliminar
-                                            </button>
-                                        </form>
-                                    </td>
+                                    
                                 </tr>
                                 <%}%>
                                 </tbody>

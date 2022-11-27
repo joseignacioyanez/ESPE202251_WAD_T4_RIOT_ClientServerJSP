@@ -1,29 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
+import java.math.BigDecimal;
 import org.bson.types.ObjectId;
 
 /**
  *
- * @author robert
+ * @author mishe
  */
 public class MenuItem {
     private ObjectId _id;
-    private String type;
+    private String status;
+    private String code;
+    private String category;
     private String name;
-    private float price;
-    private boolean paysTaxes;
+    private BigDecimal price;
+    private String paysTaxes;
  
-public MenuItem() {
+    public MenuItem() {
     
-}
-public MenuItem(ObjectId id, String type, String name, float price, boolean paysTaxes) {
-        this._id = id;
-        this.type = type;
+    }
+
+    public MenuItem(ObjectId _id, String status, String code, String category, String name, BigDecimal price, String paysTaxes) {
+        this._id = _id;
+        this.status = status;
+        this.code = code;
+        this.category = category;
         this.name = name;
         this.price = price;
         this.paysTaxes = paysTaxes;
@@ -33,41 +34,64 @@ public MenuItem(ObjectId id, String type, String name, float price, boolean pays
         return _id;
     }
 
-    public void setId(ObjectId id) {
-        this._id = id;
+    public void setId(ObjectId _id) {
+        this._id = _id;
     }
 
-    public String gettype() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public void settype(String type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getname() {
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public float getprice() {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setTelefono(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public boolean getpaysTaxes() {
+    public String getPaysTaxes() {
         return paysTaxes;
     }
 
-    public void setDireccion(boolean paysTaxes) {
+    public void setPaysTaxes(String paysTaxes) {
         this.paysTaxes = paysTaxes;
+    }  
+
+    public void setOidString(String strippedOidFromJson) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
-}
+
+    public String toJson() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+  }

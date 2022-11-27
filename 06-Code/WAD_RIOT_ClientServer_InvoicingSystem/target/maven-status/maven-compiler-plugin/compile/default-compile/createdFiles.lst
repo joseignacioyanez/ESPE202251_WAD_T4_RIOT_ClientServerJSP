@@ -11,8 +11,10 @@ ModelDAOImpl\InvoiceDAOImpl.class
 com\mycompany\wad_riot_clientserver_invoicingsystem\resources\JakartaEE8Resource.class
 Model\TestObjectId.class
 Model\User.class
+ModelDAOImpl\MenuItemDAOImpl.class
 ModelDAOImpl\UserDAOImpl.class
 com\mycompany\wad_riot_clientserver_invoicingsystem\JakartaRestConfiguration.class
+Interfaces\MenuItemDAO.class
 Interfaces\UserDAO.class
 Model\TestBcrypt.class
 =======

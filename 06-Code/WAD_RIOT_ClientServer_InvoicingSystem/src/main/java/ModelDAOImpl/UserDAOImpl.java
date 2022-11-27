@@ -36,7 +36,7 @@ public class UserDAOImpl implements UserDAO{
     MongoCollection<Document> usersDBResult;
     User user;
 
-
+    
     @Override
     public ArrayList<User> listUsers() {
         ArrayList<User> usersList = new ArrayList<>();
@@ -57,6 +57,7 @@ public class UserDAOImpl implements UserDAO{
                 String strippedOidFromJson = userResultInJson.substring(18, 42);
                 user.setOidString(strippedOidFromJson);
                 
+                System.out.println("OidString of this user is: " + user.getOidString());
                 
                 usersList.add(user);
             }
@@ -65,6 +66,8 @@ public class UserDAOImpl implements UserDAO{
             System.out.println("Could not get the user information " + e);
         }
         return usersList;
+        
+        
     }
 
     @Override

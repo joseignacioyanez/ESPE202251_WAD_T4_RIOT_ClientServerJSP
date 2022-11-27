@@ -37,7 +37,6 @@
             
             <%
                 UserDAOImpl userDAO = new UserDAOImpl();
-                System.out.println("Llegue aqui");
                 String idString = request.getParameter("id");
                         
                 User user = userDAO.listUser(idString);

@@ -16,5 +16,6 @@ public class TestObjectId {
         ObjectId objectId = new ObjectId("637ef7f774565d726b546f3c");
         Gson gson = new Gson();
         System.out.println(gson.toJson(objectId));
+        System.out.println(objectId.toHexString());
     }
 }

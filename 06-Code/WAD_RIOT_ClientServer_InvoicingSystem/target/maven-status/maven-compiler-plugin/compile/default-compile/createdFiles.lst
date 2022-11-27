@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Model\Invoice$InvoiceItem.class
 Interfaces\InvoiceDAO.class
 MongoDBConnection\MongoDBConnection.class
@@ -14,3 +15,25 @@ ModelDAOImpl\UserDAOImpl.class
 com\mycompany\wad_riot_clientserver_invoicingsystem\JakartaRestConfiguration.class
 Interfaces\UserDAO.class
 Model\TestBcrypt.class
+=======
+com/mycompany/wad_riot_clientserver_invoicingsystem/JakartaRestConfiguration.class
+Interfaces/UserDAO.class
+Model/Invoice$InvoiceItem.class
+Model/TestBcrypt.class
+ModelDAOImpl/UserDAOImpl.class
+ModelDAOImpl/ClientDAOImpl.class
+Model/TestsMongoDB.class
+Model/GsonUtils$2.class
+com/mycompany/wad_riot_clientserver_invoicingsystem/resources/JakartaEE8Resource.class
+Model/GsonUtils$1.class
+Interfaces/InvoiceDAO.class
+Model/TestObjectId.class
+Model/Invoice.class
+Model/MenuItem.class
+Model/User.class
+MongoDBConnection/MongoDBConnection.class
+Controller/Controller.class
+Model/GsonUtils.class
+Interfaces/ClientDAO.class
+Model/Client.class
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36

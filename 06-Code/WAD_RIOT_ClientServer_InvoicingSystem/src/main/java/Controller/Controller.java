@@ -1,7 +1,12 @@
 package Controller;
 
+import Model.Client;
 import Model.User;
+<<<<<<< HEAD
 import Model.Invoice;
+=======
+import ModelDAOImpl.ClientDAOImpl;
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
 import ModelDAOImpl.UserDAOImpl;
 import ModelDAOImpl.InvoiceDAOImpl;
 import java.io.IOException;
@@ -25,13 +30,19 @@ public class Controller extends HttpServlet {
     /*Atributes*/
     String loginViewRoute = "";
     String confirmationRoute = "Views/new.jsp";
-    String invoicingViewRoute = "Views/Invoice/shii.html";
+    String invoicingViewRoute = "Views/Invoice/newInvoice.jsp";
     String adminMenuRoute = "Views/menu/adminMenu.jsp";
     String adminUsersRoute = "Views/users/adminUsers.jsp";
     String updateUserViewRoute = "Views/users/updateUser.jsp";
     String createUserViewRoute = "Views/users/createUser.jsp";
+<<<<<<< HEAD
     String adminInvoiceViewRoute = "Views/Invoice/adminInvoices.jsp";
     String updateInvoiceViewRoute = "Views/Invoice/updateInvoice.jsp";;
+=======
+    String adminClientsViewRoute = "Views/Clients/adminClients.jsp";
+    String updateClientViewRoute = "Views/Clients/updateClient.jsp";
+    String createClientViewRoute = "Views/Clients/createClient.jsp";
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
     /* TODO  Routes to Views*/
     
     // Objects
@@ -39,6 +50,7 @@ public class Controller extends HttpServlet {
     
     // DAOs
     UserDAOImpl userDAO = new UserDAOImpl();
+    ClientDAOImpl clientDAO = new ClientDAOImpl();
     
         
 
@@ -139,10 +151,10 @@ public class Controller extends HttpServlet {
                             viewToSend = adminMenuRoute;
                         }
                         else if(userType.equals("cashier")){
+                            //TEST
+                            request.setAttribute("errorClientDoesNotExist", "error");
                             viewToSend = invoicingViewRoute;
-                            break;
                         }
-                        
                     }
                     else
                     {
@@ -150,8 +162,6 @@ public class Controller extends HttpServlet {
                         request.setAttribute("error","Usuario o Contraseña Incorrectos");
                         viewToSend = "";
                     }
-                    
-                    
                 }
                 else{
                     System.out.println("User does not exist");
@@ -167,6 +177,7 @@ public class Controller extends HttpServlet {
             break;
             case "goToUpdateUserView" :
                 request.setAttribute("id", request.getParameter("id"));
+                System.out.println("The id that comes from adminUsers and is going to be updated is: " + request.getParameter("id"));
                 viewToSend = updateUserViewRoute;
             break;
             case "updateUser":
@@ -191,7 +202,7 @@ public class Controller extends HttpServlet {
                 String fullNameWeb = request.getParameter("fullName");
                 String fullNameDB = user.getFullName();
                 System.out.println("FullName Web: " + fullNameWeb);
-                System.out.println("FullNAme DB: " + fullNameDB);
+                System.out.println("FullName DB: " + fullNameDB);
                 if(fullNameWeb.equals(fullNameDB))
                 {
                     System.out.println("Both fullNames are equal");
@@ -277,6 +288,7 @@ public class Controller extends HttpServlet {
             case "adminInvoices":
                 viewToSend = adminInvoiceViewRoute;    
             break;
+<<<<<<< HEAD
             
             case "goToUpdateInvoiceView" :
                     String id = request.getParameter("id");
@@ -285,6 +297,73 @@ public class Controller extends HttpServlet {
             break;
             
                     
+=======
+            case "adminClients":
+                viewToSend = adminClientsViewRoute;
+            break;
+            case "goToUpdateClientView":
+                viewToSend = updateClientViewRoute;
+            break;
+            case "updateClient":
+                String idClientToUpdate = request.getParameter("id");
+                try {
+                    Client client = clientDAO.getClient(idClientToUpdate);
+                    
+                    // Correct the id
+                    client.setId(new ObjectId(idClientToUpdate));
+                    
+                    //Update Client with form fields
+                    client.setIdCard(request.getParameter("idCard"));
+                    client.setName(request.getParameter("name"));
+                    client.setAddress(request.getParameter("address"));
+                    client.setCellphone(request.getParameter("cellphone"));
+                    client.setEmail(request.getParameter("email"));
+                    
+                    
+                   // Update in DB
+                    boolean updated = clientDAO.updateClient(client);
+                    
+                    if (!updated){
+                        request.setAttribute("error", "No se modificó el Cliente exitosamente");
+                        viewToSend = adminClientsViewRoute;
+                        break;
+                    }
+                    else if (updated){
+                        // Confirmation message
+                        request.setAttribute("success", "Cliente modificado exitosamente");
+                        viewToSend = adminClientsViewRoute;
+                        break;
+                    }
+                    
+                } catch (Exception e) {
+                    System.out.println("Could not update the client to be updated " + e);
+                }
+            break;
+            case "goToCreateClientView":
+                viewToSend = createClientViewRoute;
+            break;
+            case "createClient":
+                Client client = new Client();
+                client.setName(request.getParameter("name"));
+                client.setIdCard(request.getParameter("idCard"));
+                client.setAddress(request.getParameter("address"));
+                client.setCellphone(request.getParameter("cellphone"));
+                client.setEmail(request.getParameter("email"));
+                boolean created = clientDAO.addClient(client);
+                
+                if (!created){
+                        request.setAttribute("error", "No se modificó el Cliente exitosamente");
+                        viewToSend = adminClientsViewRoute;
+                        break;
+                }
+                else if (created){
+                    // Confirmation message
+                    request.setAttribute("success", "Cliente creado exitosamente");
+                    viewToSend = adminClientsViewRoute;
+                    break;
+                }
+            break;
+>>>>>>> a3d2d4029db9b5c4dc012fd570c78ed2e5c16c36
             default:
                 viewToSend = "";
         }

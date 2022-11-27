@@ -141,8 +141,6 @@ public class Controller extends HttpServlet {
                             viewToSend = adminMenuRoute;
                         }
                         else if(userType.equals("cashier")){
-                            //TEST
-                            request.setAttribute("errorClientDoesNotExist", "error");
                             viewToSend = invoicingViewRoute;
                         }
                     }

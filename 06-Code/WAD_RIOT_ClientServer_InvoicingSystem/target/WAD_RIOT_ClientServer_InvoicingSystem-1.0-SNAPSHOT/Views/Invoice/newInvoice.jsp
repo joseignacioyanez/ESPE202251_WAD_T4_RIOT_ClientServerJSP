@@ -38,123 +38,21 @@
                             <a class="nav-link active" href="facturas.php"><i class="bi bi-file-earmark"></i> Nueva Factura</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="productos.php"><i class="bi bi-check-circle-fill"></i> Facturar</a>
+                            <a class="nav-link " href="Controller"><i class="bi bi-check-circle-fill"></i> Facturar</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item">
-                            <a class="nav-link" href="login.php?logout"> <i class="bi bi-power"></i> Salir</a>
+                            <form action="Controller" method="post">
+                                <input hidden name='action' value=''>
+                                <button class="btn btn-danger"><i class="bi bi-power"></i> Salir</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Buscar productos</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="q" placeholder="Buscar productos" onkeyup="load(1)">
-                                </div>
-                                <div class="col-lg-6">
-                                    <button type="button" class="btn btn-secondary" onclick="load(1)"><span class='bi bi-search'></span> Buscar</button>
-                                </div>
-                            </div>
-                        </form>
-                        <div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div>
-                        <!-- Carga gif animado -->
-                        <div id="outer_div" ></div>
-                        <!-- Datos ajax Final -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Agregar nuevo cliente		</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" id="guardarDatos" name="guardarDatos">
-                            <div id="resultado_ajax_cl"></div>
-                            <div class="mb-2">
-                                <label for="nombre_cl" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre_cl" name="nombre_cl" required>
-                            </div>
-                            <div class="mb-2">
-                                <label for="telefono_cl" class="col-form-label">Teléfono:</label>
-                                <input type="text" class="form-control" id="telefono_cl" name="telefono_cl" >
-                            </div>
-                            <div class="mb-2">
-                                <label for="email_cl" class="col-form-label">E-mail:</label>
-                                <input type="email" class="form-control" id="email_cl" name="email_cl" >
-                            </div>
-                            <div class="mb-2">
-                                <label for="direccion_cl" class="col-form-label">Dirección:</label>
-                                <textarea class="form-control" id="direccion_cl" name="direccion_cl"   maxlength="255" ></textarea>	
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" >Guardar datos</button>
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="addModalProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Agregar nuevo producto		</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" id="guardarDatosProducto" name="guardarDatosProducto">
-                            <div id="resultado_ajax_x"></div>
-                            <div class="mb-2">
-                                <label for="codigo" class="col-form-label">Código del producto:</label>
-                                <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código del producto" required>
-                            </div>
-                            <div class="mb-2">
-                                <label for="nombre" class="col-form-label">Nombre del producto:</label>
-                                <textarea class="form-control" id="nombre" name="nombre" placeholder="Nombre del producto" required maxlength="255" ></textarea>
-                            </div>
-                            <div class="mb-2">
-                                <label for="estado" class="col-form-label">Estado:</label>
-                                <select class="form-control" id="estado" name="estado" required>
-                                    <option value="">-- Selecciona estado --</option>
-                                    <option value="1" selected>Activo</option>
-                                    <option value="0">Inactivo</option>
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <label for="precio" class="col-form-label">Precio:</label>
-                                <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio de venta del producto" required pattern="^[0-9]{1,5}(\.[0-9]{0,2})?$" title="Ingresa sólo números con 0 ó 2 decimales" maxlength="8">	
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" >Guardar datos</button>
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <main class="container">
             <div class="card my-3">
                 <div class="d-flex card-header">
@@ -170,7 +68,7 @@
                                 <input id="idCard" name="idCard" type='text' value="" required value="" class="form-control input-sm" placeholder="Busque la Identificación">	
                             </div>
 
-                            <button class="col-1 btn btn-secondary btn-square-sm"><i class='bi bi-search'></i></button>
+                            <button class="col-1 btn btn-secondary btn-square-sm" type="submit" name="action" value="searchClient"><i class='bi bi-search'></i></button>
                             
                             <label for="clientName" class="col-lg-1 control-label">Nombre de Cliente</label>
                             <div class="col-lg-3">
@@ -214,8 +112,9 @@
                         <div class="col-md-12">
                             <div class="d-flex justify-content-md-end">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addModal"><i class='bi bi-person-fill'></i> Nuevo cliente</button>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-outline-secondary"><i class='bi bi-search'></i> Agregar productos</button>
+                                    <button type="button" class="btn btn-outline-secondary"><i class='bi bi-person-fill'></i> Nuevo cliente</button>
+                                    <button type="button" class="btn btn-outline-secondary"><i class='bi bi-search'></i> Agregar productos</button>
+                                    <button type="button" name="action" value="" class="btn btn-success"><i class="bi bi-check"></i>Facturar</button>
                                 </div>
                             </div>
                         </div>

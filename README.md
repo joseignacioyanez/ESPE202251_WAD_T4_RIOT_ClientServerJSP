@@ -1,6 +1,8 @@
 # ESPE202251_WAD_T5_RIOT_ClientServerJSP
 Team 5 - RIOT [RIOT Is Our Team] - Client-Server Web Application wit JSP and MongoDB
 
+Google Doc: https://docs.google.com/document/d/1MxO-AWqYOYsuk94_0tUYQSFmKBhvNJ3fcShuSwrSZ5Q/edit?usp=sharing
+
 ![alt text](https://i.imgur.com/yguVB03.png)
 ![alt text](https://i.imgur.com/hIpI8Cq.png)
 ![alt text](https://i.imgur.com/xWCxmUs.png)

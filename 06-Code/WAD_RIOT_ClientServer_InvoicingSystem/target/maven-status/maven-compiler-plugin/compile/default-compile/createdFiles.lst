@@ -1,15 +1,12 @@
 com/mycompany/wad_riot_clientserver_invoicingsystem/JakartaRestConfiguration.class
 Interfaces/UserDAO.class
 Model/Invoice$InvoiceItem.class
-Model/TestBcrypt.class
 ModelDAOImpl/MenuItemDAOImpl.class
 ModelDAOImpl/UserDAOImpl.class
 ModelDAOImpl/ClientDAOImpl.class
 Interfaces/MenuItemDAO.class
-Model/TestsMongoDB.class
 com/mycompany/wad_riot_clientserver_invoicingsystem/resources/JakartaEE8Resource.class
 Interfaces/InvoiceDAO.class
-Model/TestObjectId.class
 Model/Invoice.class
 Model/MenuItem.class
 ModelDAOImpl/InvoiceDAOImpl.class

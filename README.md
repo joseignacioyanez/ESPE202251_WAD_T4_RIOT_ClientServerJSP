@@ -1,2 +1,11 @@
-# ESPE202251_WAD_T4_RIOT_ClientServerJSP
-Team 4 - RIOT [RIOT Is Our Team] - Client-Server Web Application wit JSP and MongoDB
+# ESPE202251_WAD_T5_RIOT_ClientServerJSP
+Team 5 - RIOT [RIOT Is Our Team] - Client-Server Web Application wit JSP and MongoDB
+
+![alt text](https://i.imgur.com/yguVB03.png)
+![alt text](https://i.imgur.com/hIpI8Cq.png)
+![alt text](https://i.imgur.com/xWCxmUs.png)
+![alt text](https://i.imgur.com/DIEtTM8.png)
+
+
+## Deployed to the Cloud and Accesible via:
+http://34.82.171.79:8080/WAD_RIOT_ClientServer_InvoicingSystem-1.0-SNAPSHOT/

@@ -4,6 +4,7 @@
   "description": "A nodejs REST API for our invoicing system for a Restaurant named Santo Placer",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

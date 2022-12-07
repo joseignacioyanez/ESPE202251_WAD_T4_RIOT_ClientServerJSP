@@ -1,7 +1,14 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser")
 require("dotenv").config()
+
+// Parser for error we had in class on POST when parsing body of Request
+// modified from Tema 2 Tutorial 
+// and https://stackoverflow.com/questions/69913477/cannot-read-properties-of-undefined-in-nodejs
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 // Routes 
 const routes = require("./routes/MenuItemRoutes");
@@ -30,7 +37,7 @@ app.listen(PORT, () => {
     console.log(`Server Running in Port ${PORT}`)
 })
 
-// Make an Index for the API
+// Make an Index for the API TODO
 app.get("/restaurant", function(req,res) {
     res.send("Hello World!")
 })

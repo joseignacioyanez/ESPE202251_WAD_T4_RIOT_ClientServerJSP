@@ -24,7 +24,7 @@ const menuItemSchema = new mongoose.Schema({
     },
     paysTaxes:{
         required: true,
-        type: String
+        type: Boolean
     }
 })
 

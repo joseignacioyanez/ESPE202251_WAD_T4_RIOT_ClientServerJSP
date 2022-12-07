@@ -63,7 +63,6 @@ router.put("/menuItem/:code", async (req, res) => {
                 res.status(404).json("There is no MenuItem with that code");
             }
             else{
-                console.log("result: " + result)
                 menuItemOld = result;
             }
         }).clone(); 
@@ -84,7 +83,6 @@ router.put("/menuItem/:code", async (req, res) => {
     if (requestParameters.includes("price")) newMenuItem.price = req.body.price;
     if (requestParameters.includes("paysTaxes")) newMenuItem.paysTaxes = req.body.paysTaxes;
 
-    console.log(newMenuItem)
     // Do the Updating
     try {
         const filter = { code: req.params.code };
@@ -95,7 +93,6 @@ router.put("/menuItem/:code", async (req, res) => {
             upsert: false
         });
 
-        console.log("updated Item: " + updatedMenuItem);
         res.status(200).json({ message:"Success at Updating item of Menu",
                                 newItem: updatedMenuItem })
 
@@ -103,3 +100,19 @@ router.put("/menuItem/:code", async (req, res) => {
         res.status(500).json({message: error.message});
     }
 })
+
+// DELETE MenuItem by Code
+router.delete("/menuItem/:code", async (req, res) => {
+    try {
+        await MenuItem.deleteOne({code: req.params.code}, function (err) {
+            if (err) res.status(500).json({message: "Error at deleting menuItem"});
+        }).clone();
+        res.status(200).json({message:`If there was a menu item with code ${req.params.code}, it has been deleted :(`})
+
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
+})
+
+//POST - Enviar un descuento en un item de menú, al Whatsapp de un cliente
+// /restaurant/menuItem/code/discount/20/client/CI

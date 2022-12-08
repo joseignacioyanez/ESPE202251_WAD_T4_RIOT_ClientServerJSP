@@ -21,10 +21,10 @@ router.get("/users", async (req, res) => {
     }
 })
 
-// GET users by code
-router.get("/users/:code", async (req,res) => {
+// GET users by idCard
+router.get("/users/:idCard", async (req,res) => {
     try {
-        const usersData = await Users.find({"code":req.params.code});
+        const usersData = await Users.find({"idCard":req.params.idCard});
         res.status(200).json(usersData)
     } catch (error) {
         res.status(500).json({message:error.message})

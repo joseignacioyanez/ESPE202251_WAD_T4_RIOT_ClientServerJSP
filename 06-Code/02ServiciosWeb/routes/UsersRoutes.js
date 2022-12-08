@@ -7,6 +7,11 @@ module.exports = router;
 
 // GET all the users
 router.get("/users", async (req, res) => {
+    if(req.body.idCard != null){
+        console.log("I'm not a teapo    t")
+        res.status(418).json({message:"The server refuses the attempt to brew coffee with a teapot. This services does not use parameters"})
+    }
+    
     try {
         const usersData = await Users.find();
         res.status(200).json(usersData);

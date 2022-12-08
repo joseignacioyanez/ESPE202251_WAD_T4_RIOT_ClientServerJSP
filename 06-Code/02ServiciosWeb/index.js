@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 
 // Routes 
 const routes = require("./routes/MenuItemRoutes");
+const routes = require("./routes/UsersRoutes");
 app.use('/restaurant', routes)
 
 

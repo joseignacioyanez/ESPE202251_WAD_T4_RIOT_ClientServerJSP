@@ -1,4 +1,3 @@
-const { Decimal128 } = require('bson');
 const mongoose = require("mongoose");
 
 const usersSchema = new mongoose.Schema({
@@ -23,3 +22,6 @@ const usersSchema = new mongoose.Schema({
         type: String
     }
 })
+// Third parameter used based on this website, this is the pure name of the Collection on Mongo
+// https://stackoverflow.com/questions/14183611/mongoose-always-returning-an-empty-array-nodejs
+module.exports = mongoose.model('Users', usersSchema, 'users')

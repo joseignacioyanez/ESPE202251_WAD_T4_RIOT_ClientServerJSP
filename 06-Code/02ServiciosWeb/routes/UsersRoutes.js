@@ -88,14 +88,14 @@ router.put("/users/:code", async (req, res) => {
         const filter = { code: req.params.code };
         const update = newUsers;
 
-        let updatedMenuItem = await Users.findOneAndUpdate(filter, update, {
+        let updateUsers = await Users.findOneAndUpdate(filter, update, {
             new: true,
             upsert: false
         });
 
-        console.log("updated Item: " + updatedMenuItem);
+        console.log("updated Item: " + updatedUsers);
         res.status(200).json({ message:"Success at Updating item of Menu",
-                                newItem: updatedMenuItem })
+                                newItem: updatedUsers })
 
     } catch (error) {
         res.status(500).json({message: error.message});

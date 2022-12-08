@@ -125,7 +125,7 @@ router.delete("/menuItem/:code", async (req, res) => {
 router.post('/menuItem/:code/discount/:percentage/client/:idCard', function(req, res, next) {
     // Retrieve MenuItem 
 
-    
+
     // Calculate Prices and Discount
 
     // Retrieve Client Details
@@ -134,7 +134,7 @@ router.post('/menuItem/:code/discount/:percentage/client/:idCard', function(req,
     var message = `*¡Restaurante Santo Placer le ofrece una promoción!* \n\n
                     ¡Saludos {{1}}! Si presenta este mensaje durante esta semana,
                      puede obtener un {{2}}% de descuento en {{3}}. 
-                     Podrá disfrutar una agradable comida por tan solo ${{4}}. 
+                     Podrá disfrutar una agradable comida por tan solo \${{4}}. 
                      Precio normal:  \${{5}}).\n\n !Lo esperamos 🍽!`
 
     // Attach headers for Whatsapp API

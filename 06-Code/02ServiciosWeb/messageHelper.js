@@ -1,6 +1,7 @@
 var axios = require('axios');
 
 function sendMessage(data) {
+    console.log(data);
     var config = {
     method: 'post',
     url: `https://graph.facebook.com/${process.env.VERSION}/${process.env.PHONE_NUMBER_ID}/messages`,
@@ -10,14 +11,13 @@ function sendMessage(data) {
     },
     data: data
   };
-  console.log("yes")
   return axios(config)
 }
 
 function getTextMessageInput(recipient, text) {
   return JSON.stringify({
     "messaging_product": "whatsapp",
-    "to": recipient,
+    "to": Number.parseInt(recipient),
     "type": "text",
     "text": {
       "body": text

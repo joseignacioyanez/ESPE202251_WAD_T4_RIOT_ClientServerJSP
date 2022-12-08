@@ -15,12 +15,11 @@ const routes = require("./routes/MenuItemRoutes");
 const routes1 = require("./routes/UsersRoutes");
 app.use('/restaurant', routes, routes1)
 
-//Change url with Env Variables TODO
+// Connect to DB Using Environment Variables
 console.log("this are the credentials: " + process.env.MONGO_USER_T5 + process.env.MONGO_PSWD_T5)
 url = `mongodb+srv://${process.env.MONGO_USER_T5}:${process.env.MONGO_PSWD_T5}@mongoji.nf5scze.mongodb.net/WAD_1_Invoicing_SantoPlacer?retryWrites=true&w=majority`;
 const database = mongoose.connection;
 mongoose.connect(url);
-
 database.on("error", console.error.bind(console, "Error connecting to MongoDB"));
 database.once('connected', () => {console.log("Succesfuly connected to MongoDB")});
 

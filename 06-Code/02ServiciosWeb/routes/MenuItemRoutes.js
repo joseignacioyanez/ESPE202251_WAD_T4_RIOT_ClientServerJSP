@@ -2,6 +2,7 @@ const { request } = require("express");
 const express = require("express");
 const router = express.Router();
 const MenuItem = require("../models/MenuItem")
+const Client = require("../models/Client") // To send discounts on Whatsapp
 // for Whatsapp
 require('dotenv').config()
 const { sendMessage, getTextMessageInput } = require("../messageHelper");
@@ -117,28 +118,45 @@ router.delete("/menuItem/:code", async (req, res) => {
     }
 })
 
+// Business Rule
+// POST - Send discount on a certain menuItem to a certain client for certain percentage
 
-//POST - Enviar un descuento en un item de menú, al Whatsapp de un cliente
-// /restaurant/menuItem/code/discount/20/client/CI	
-
-// Code modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
-router.post('/menuItem/:code/discount/:percentage/client/:idCard', function(req, res, next) {
+// Code of the Whatsapp API heavily modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
+router.post('/menuItem/:code/discount/:percentage/client/:idCard', async function(req, res, next) {
+    
     // Retrieve MenuItem 
-
-
-    // Calculate Prices and Discount
+    let menuItemName;
+    let originalPrice;
+    let discountPercentage;
+    let newPrice;
+    try {
+        const menuItemData = await MenuItem.findOne({"code":req.params.code});
+        menuItemName = menuItemData.name;
+        
+        // Calculate Prices and Discount
+        originalPrice = menuItemData.price;
+        discountPercentage = req.params.percentage;
+        newPrice = originalPrice - (originalPrice*(discountPercentage*0.01));
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
 
     // Retrieve Client Details
+    let clientName;
+    let clientCellphone;
+    try {
+        const clientData = await Client.findOne({"idCard":req.params.idCard});
+        clientName = clientData.name;
+        clientCellphone = clientData.cellphone;
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
 
     // Message template to fill with Discount Details
-    var message = `*¡Restaurante Santo Placer le ofrece una promoción!* \n\n
-                    ¡Saludos {{1}}! Si presenta este mensaje durante esta semana,
-                     puede obtener un {{2}}% de descuento en {{3}}. 
-                     Podrá disfrutar una agradable comida por tan solo \${{4}}. 
-                     Precio normal:  \${{5}}).\n\n !Lo esperamos 🍽!`
+    var message = `*¡Restaurante Santo Placer le ofrece una promoción!* \n\n ¡Saludos ${clientName}! Si presenta este mensaje durante esta semana, puede obtener un *${discountPercentage}%* de descuento en ${menuItemName}. Podrá disfrutar una agradable comida por tan solo *\$${newPrice}*. (Precio normal:  \$${originalPrice}).\n\n !Lo esperamos 🍽!`;
 
     // Attach headers for Whatsapp API
-    var data = getTextMessageInput(process.env.RECIPIENT_WAID, message);
+    var data = getTextMessageInput(clientCellphone, message);
     
     sendMessage(data)
       .then(function (response) {

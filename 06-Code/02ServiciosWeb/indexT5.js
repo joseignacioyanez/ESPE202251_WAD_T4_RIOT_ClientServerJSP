@@ -15,7 +15,8 @@ app.use(bodyParser.json())
 const routesMenuItems = require("./routes/MenuItemRoutes");
 const routesUsers = require("./routes/UsersRoutes");
 const routesInvoices = require("./routes/InvoiceRoutes");
-app.use('/restaurant', routesMenuItems, routesUsers, routesInvoices)
+const routesClients = require("./routes/ClientRoutes");
+app.use('/restaurant', routesMenuItems, routesUsers, routesInvoices, routesClients)
 
 // Connect to DB Using Environment Variables
 console.log("this are the credentials: " + process.env.MONGO_USER_T5 + process.env.MONGO_PSWD_T5)

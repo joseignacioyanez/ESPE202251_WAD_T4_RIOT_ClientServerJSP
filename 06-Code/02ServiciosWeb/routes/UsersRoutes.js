@@ -102,3 +102,16 @@ router.put("/users/:idCard", async (req, res) => {
         res.status(500).json({message: error.message});
     }
 })
+
+// DELETE users by idCard
+router.delete("/users/:idCard", async (req, res) => {
+    try {
+        await Users.deleteOne({idCard: req.params.idCard}, function (err) {
+            if (err) res.status(500).json({message: "Error at deleting users"});
+        }).clone();
+        res.status(200).json({message:`If there was a users with idCard ${req.params.idCard}, it has been deleted :(`})
+
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
+})

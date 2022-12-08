@@ -12,7 +12,9 @@ app.use(bodyParser.json())
 
 // Routes 
 const routes = require("./routes/MenuItemRoutes");
-app.use('/restaurant', routes)
+const routes1 = require("./routes/UsersRoutes");
+
+app.use('/restaurant', routes, routes1)
 
 //Change url with Env Variables TODO
 console.log("this are the credentials: " + process.env.MONGO_USER_T5 + process.env.MONGO_PSWD_T5)

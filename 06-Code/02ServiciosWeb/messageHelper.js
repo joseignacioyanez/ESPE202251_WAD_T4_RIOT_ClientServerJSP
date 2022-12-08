@@ -1,3 +1,4 @@
+// Code of the Whatsapp API heavily modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
 var axios = require('axios');
 
 function sendMessage(data) {

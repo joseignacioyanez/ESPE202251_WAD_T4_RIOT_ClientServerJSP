@@ -2,6 +2,9 @@ const { request } = require("express");
 const express = require("express");
 const router = express.Router();
 const MenuItem = require("../models/MenuItem")
+// for Whatsapp
+require('dotenv').config()
+const { sendMessage, getTextMessageInput } = require("../messageHelper");
 
 module.exports = router;
 
@@ -114,5 +117,37 @@ router.delete("/menuItem/:code", async (req, res) => {
     }
 })
 
+
 //POST - Enviar un descuento en un item de menú, al Whatsapp de un cliente
-// /restaurant/menuItem/code/discount/20/client/CI
+// /restaurant/menuItem/code/discount/20/client/CI	
+
+// Code modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
+router.post('/menuItem/:code/discount/:percentage/client/:idCard', function(req, res, next) {
+    // Retrieve MenuItem 
+
+    
+    // Calculate Prices and Discount
+
+    // Retrieve Client Details
+
+    // Message template to fill with Discount Details
+    var message = `*¡Restaurante Santo Placer le ofrece una promoción!* \n\n
+                    ¡Saludos {{1}}! Si presenta este mensaje durante esta semana,
+                     puede obtener un {{2}}% de descuento en {{3}}. 
+                     Podrá disfrutar una agradable comida por tan solo ${{4}}. 
+                     Precio normal:  \${{5}}).\n\n !Lo esperamos 🍽!`
+
+    // Attach headers for Whatsapp API
+    var data = getTextMessageInput(process.env.RECIPIENT_WAID, message);
+    
+    sendMessage(data)
+      .then(function (response) {
+        res.sendStatus(200);
+        return;
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.sendStatus(500);
+        return;
+      });
+  });

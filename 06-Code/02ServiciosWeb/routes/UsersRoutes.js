@@ -84,7 +84,7 @@ router.put("/users/:idCard", async (req, res) => {
     console.log(newUsers)
     // Do the Updating
     try {
-        const filter = { idCard: req.params.idCard };
+        const filter = { idCard: req.params.idCard   };
         const update = newUsers;
 
         let updatedUsers = await Users.findOneAndUpdate(filter, update, {

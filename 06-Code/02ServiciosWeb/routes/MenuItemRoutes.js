@@ -122,7 +122,7 @@ router.delete("/menuItem/:code", async (req, res) => {
 // POST - Send discount on a certain menuItem to a certain client for certain percentage
 
 // Code of the Whatsapp API modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
-router.post('/menuItem/:code/discount/:percentage/client/:idCard', async function(req, res, next) {
+router.get('/menuItem/:code/discount/:percentage/client/:idCard', async function(req, res, next) {
     
     // Retrieve MenuItem 
     let menuItemName;

@@ -7,8 +7,7 @@ module.exports = router;
 
 // GET all the users
 router.get("/users", async (req, res) => {
-    // Easter Egg code 418 Teapot
-    if(req.body.name != null){
+    if(req.body.idCard != null){
         console.log("I'm not a teapot")
         res.status(418).json({message:"The server refuses the attempt to brew coffee with a teapot. This services does not use parameters"})
     }
@@ -49,17 +48,17 @@ router.post("/users", async (req,res) => {
     }
 })
 
-// PUT Update users parameters based on code
-router.put("/users/:code", async (req, res) => {
-    // Find out if that users code exists and save on variable
+// PUT Update users parameters based on idCard
+router.put("/users/:idCard", async (req, res) => {
+    // Find out if that users idCard exists and save on variable
     let usersOld;
     try {
-        await Users.findOne({"code":req.params.code}, (err, result) => {
+        await Users.findOne({"idCard":req.params.idCard}, (err, result) => {
             if(err){
                 res.status(500).json({message: err.message});
             }
             else if(!result){
-                res.status(404).json("There is no Users with that code");
+                res.status(404).json("There is no Users with that idCard");
             }
             else{
                 console.log("result: " + result)
@@ -85,7 +84,7 @@ router.put("/users/:code", async (req, res) => {
     console.log(newUsers)
     // Do the Updating
     try {
-        const filter = { code: req.params.code };
+        const filter = { idCard: req.params.idCard };
         const update = newUsers;
 
         let updatedUsers = await Users.findOneAndUpdate(filter, update, {

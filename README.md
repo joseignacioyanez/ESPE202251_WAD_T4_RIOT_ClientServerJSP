@@ -1,4 +1,4 @@
-# ESPE202251_WAD_T5_RIOT_InvoicingSystem - Team 5 - RIOT [RIOT Is Our Team]
+# WAD_InvoicingSystem - Team 5 - RIOT [RIOT Is Our Team] - ESPE
 
 ## Activity 2 - REST API with Nodejs and MongoDB on AWS EC2
 

@@ -7,8 +7,6 @@ module.exports = router;
 
 // GET all the invoices
 router.get("/invoices", async (req, res) => {
-    
-    
     try {
         const invoicesData = await Invoice.find();
         res.status(200).json(invoicesData);

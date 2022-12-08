@@ -1,6 +1,6 @@
-# WAD_InvoicingSystem - Team 5 - RIOT [RIOT Is Our Team] - ESPE
+# InvoicingSystem 🧾 - Team 5 - RIOT [RIOT Is Our Team] - ESPE_WAD 🔫
 
-## Activity 2 - REST API with Nodejs and MongoDB on AWS EC2
+## 2️⃣ Activity 2 - REST API with Nodejs and MongoDB on AWS EC2
 
 ### Google Doc:
 https://docs.google.com/document/d/1TNORa9cNLx0goHKtFYnOZ_lSa9c8QvrchnQR8L24IL0/edit?usp=sharing
@@ -13,7 +13,7 @@ http://ec2-3-85-13-59.compute-1.amazonaws.com:3005/restaurant/
 TODO
 
 
-## Activity 1 - Client-Server Web Application wit JSP and MongoDB
+##  1️⃣ Activity 1 - Client-Server Web Application wit JSP and MongoDB
 
 ### Google Doc:
 https://docs.google.com/document/d/1MxO-AWqYOYsuk94_0tUYQSFmKBhvNJ3fcShuSwrSZ5Q/edit?usp=sharing

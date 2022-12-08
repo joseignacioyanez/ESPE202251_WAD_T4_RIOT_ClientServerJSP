@@ -8,7 +8,7 @@ module.exports = router;
 // GET all the users
 router.get("/users", async (req, res) => {
     if(req.body.idCard != null){
-        console.log("I'm not a teapot")
+        console.log("I'm not a teapo    t")
         res.status(418).json({message:"The server refuses the attempt to brew coffee with a teapot. This services does not use parameters"})
     }
     
@@ -34,10 +34,11 @@ router.get("/users/:idCard", async (req,res) => {
 router.post("/users", async (req,res) => {
     let newUsers = new Users({
         idCard: req.body.idCard,
-        name: req.body.name,
-        address: req.body.address,
-        cellphone: req.body.cellphone,
-        email: req.body.email
+        fullname: req.body.fullname,
+        email: req.body.email,
+        username: req.body.username,
+        passwordHash: req.body.passwordHash,
+        type: req.body.type
     })
 
     try {
@@ -76,10 +77,11 @@ router.put("/users/:idCard", async (req, res) => {
     // Update local variable with parameters that have been sent, no Upsert
     let requestParameters = Object.keys(req.body);
     if (requestParameters.includes("idCard")) newUsers.idCard = req.body.idCard;
-    if (requestParameters.includes("name")) newUsers.name = req.body.name;
-    if (requestParameters.includes("address")) newUsers.address = req.body.address;
-    if (requestParameters.includes("cellphone")) newUsers.cellphone = req.body.cellphone;
+    if (requestParameters.includes("fullname")) newUsers.fullname = req.body.fullname;
     if (requestParameters.includes("email")) newUsers.email = req.body.email;
+    if (requestParameters.includes("username")) newUsers.username = req.body.username;
+    if (requestParameters.includes("passwordHash")) newUsers.passwordHash = req.body.passwordHash;
+    if (requestParameters.includes("type")) newUsers.type = req.body.type;
 
     console.log(newUsers)
     // Do the Updating

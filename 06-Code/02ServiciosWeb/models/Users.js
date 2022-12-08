@@ -5,19 +5,23 @@ const usersSchema = new mongoose.Schema({
         required:true,
         type: String
     },
-    name:{
+    fullname:{
         required:true,
         type: String
     },
-    address:{
-        required: true,
-        type: String
-    },
-    cellphone:{
-        required: true,
-        type: String
-    },
     email:{
+        required: true,
+        type: String
+    },
+    username:{
+        required: true,
+        type: String
+    },
+    passwordHash:{
+        required: true,
+        type: String
+    },
+    type:{
         required: true,
         type: String
     }

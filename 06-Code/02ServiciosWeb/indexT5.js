@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
+// Use environment variables for DB, PORT and WhatsApp
 require("dotenv").config()
 
 // Parser for error we had in class on POST when parsing body of Request
@@ -11,9 +12,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // Routes 
-const routes = require("./routes/MenuItemRoutes");
-const routes1 = require("./routes/UsersRoutes");
-app.use('/restaurant', routes, routes1)
+const routesMenuItems = require("./routes/MenuItemRoutes");
+const routesUsers = require("./routes/UsersRoutes");
+const routesInvoices = require("./routes/InvoiceRoutes");
+app.use('/restaurant', routesMenuItems, routesUsers, routesInvoices)
 
 // Connect to DB Using Environment Variables
 console.log("this are the credentials: " + process.env.MONGO_USER_T5 + process.env.MONGO_PSWD_T5)

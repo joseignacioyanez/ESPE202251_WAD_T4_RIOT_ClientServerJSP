@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Client = require("../models/Client") 
+const Invoice = require("../models/Invoice") // For business Rule
 
 module.exports = router;
 
@@ -99,6 +100,31 @@ router.delete("/client/:idCard", async (req, res) => {
             if (err) res.status(500).json({message: "Error at deleting Client"});
         }).clone();
         res.status(200).json({message:`If there was a Client with idCard ${req.params.idCard}, it has been deleted :(`})
+
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
+})
+
+// Business Rule
+// GET a Report of a Client
+// With the total amount he has spend on the Restaurant and how many times he has purchased
+router.get("/client/:idCard/report", async (req, res) => {
+    try {
+        let totalSpent = 0.0;
+        let timesPurchased = 0;
+        let invoicesOfClientData = await Invoice.find({idCard: req.params.idCard});
+
+        const idCardClient = req.params.idCard;
+
+        invoicesOfClientData.forEach((invoice, i) => {
+            if (String(idCardClient) == (invoice.clientIDCard)) {
+                totalSpent += Number(invoice.totalInvoice);
+                timesPurchased ++;
+            }
+        })
+
+        res.status(200).json({message:`The Client with idCard ${idCardClient} has spent \$${totalSpent} on ${timesPurchased} purchases on the Restaurant.`})
 
     } catch (error) {
         res.status(500).json({message:error.message});

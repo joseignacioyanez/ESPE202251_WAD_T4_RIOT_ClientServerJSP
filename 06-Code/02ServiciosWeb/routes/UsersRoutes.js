@@ -6,7 +6,7 @@ const Users = require("../models/Users")
 module.exports = router;
 
 // GET all the users
-router.get("/users", async (req, res) => {
+router.get("/users", async (req, res) => {    
     try {
         const usersData = await Users.find();
         res.status(200).json(usersData);
@@ -15,10 +15,10 @@ router.get("/users", async (req, res) => {
     }
 })
 
-// GET users by idCard
-router.get("/users/:idCard", async (req,res) => {
+// GET users by username
+router.get("/users/:username", async (req,res) => {
     try {
-        const usersData = await Users.find({"idCard":req.params.idCard});
+        const usersData = await Users.find({"username":req.params.username});
         res.status(200).json(usersData)
     } catch (error) {
         res.status(500).json({message:error.message})
@@ -26,10 +26,11 @@ router.get("/users/:idCard", async (req,res) => {
 })
 
 // POST a new users
+// Business Rule - Encryption with save().pre on Mongo
 router.post("/users", async (req,res) => {
     let newUsers = new Users({
         idCard: req.body.idCard,
-        fullname: req.body.fullname,
+        fullName: req.body.fullName,
         email: req.body.email,
         username: req.body.username,
         passwordHash: req.body.passwordHash,
@@ -44,20 +45,19 @@ router.post("/users", async (req,res) => {
     }
 })
 
-// PUT Update users parameters based on idCard
-router.put("/users/:idCard", async (req, res) => {
-    // Find out if that users idCard exists and save on variable
+// PUT Update users parameters based on username
+router.put("/users/:username", async (req, res) => {
+    // Find out if that users username exists and save on variable
     let usersOld;
     try {
-        await Users.findOne({"idCard":req.params.idCard}, (err, result) => {
+        await Users.findOne({"username":req.params.username}, (err, result) => {
             if(err){
                 res.status(500).json({message: err.message});
             }
             else if(!result){
-                res.status(404).json("There is no Users with that idCard");
+                res.status(404).json({message:"There is no Users with that username"});
             }
             else{
-                console.log("result: " + result)
                 usersOld = result;
             }
         }).clone(); 
@@ -71,17 +71,14 @@ router.put("/users/:idCard", async (req, res) => {
     
     // Update local variable with parameters that have been sent, no Upsert
     let requestParameters = Object.keys(req.body);
-    if (requestParameters.includes("idCard")) newUsers.idCard = req.body.idCard;
-    if (requestParameters.includes("fullname")) newUsers.fullname = req.body.fullname;
+    if (requestParameters.includes("fullName")) newUsers.fullName = req.body.fullName;
     if (requestParameters.includes("email")) newUsers.email = req.body.email;
     if (requestParameters.includes("username")) newUsers.username = req.body.username;
-    if (requestParameters.includes("passwordHash")) newUsers.passwordHash = req.body.passwordHash;
     if (requestParameters.includes("type")) newUsers.type = req.body.type;
 
-    console.log(newUsers)
     // Do the Updating
     try {
-        const filter = { idCard: req.params.idCard   };
+        const filter = { username: req.params.username   };
         const update = newUsers;
 
         let updatedUsers = await Users.findOneAndUpdate(filter, update, {
@@ -89,8 +86,7 @@ router.put("/users/:idCard", async (req, res) => {
             upsert: false
         });
 
-        console.log("updated Users: " + updatedUsers);
-        res.status(200).json({ message:"Success at Updating item of Menu",
+        res.status(200).json({ message:"Success at Updating User",
                                 newUsers: updatedUsers })
 
     } catch (error) {
@@ -98,13 +94,13 @@ router.put("/users/:idCard", async (req, res) => {
     }
 })
 
-// DELETE users by idCard
-router.delete("/users/:idCard", async (req, res) => {
+// DELETE users by username
+router.delete("/users/:username", async (req, res) => {
     try {
-        await Users.deleteOne({idCard: req.params.idCard}, function (err) {
+        await Users.deleteOne({username: req.params.username}, function (err) {
             if (err) res.status(500).json({message: "Error at deleting users"});
         }).clone();
-        res.status(200).json({message:`If there was a users with idCard ${req.params.idCard}, it has been deleted :(`})
+        res.status(200).json({message:`If there was a users with username ${req.params.username}, it has been deleted :(`})
 
     } catch (error) {
         res.status(500).json({message:error.message});

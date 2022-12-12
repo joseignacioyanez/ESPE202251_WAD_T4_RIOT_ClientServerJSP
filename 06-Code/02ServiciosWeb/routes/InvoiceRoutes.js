@@ -7,8 +7,6 @@ module.exports = router;
 
 // GET all the invoices
 router.get("/invoices", async (req, res) => {
-    
-    
     try {
         const invoicesData = await Invoice.find();
         res.status(200).json(invoicesData);
@@ -35,6 +33,7 @@ router.post("/invoices", async (req,res) => {
         clientName: req.body.clientName,
         clientEmail: req.body.clientEmail,
         subtotalInvoice: req.body.subtotalInvoice,
+        totalInvoice: req.body.totalInvoice,
         totalTaxesInvoice: req.body.totalTaxesInvoice,
         invoiceItems: req.body.invoiceItems,
         paymentMethod: req.body.paymentMethod,
@@ -83,6 +82,7 @@ router.put("/invoice/:invoiceNumber", async (req, res) => {
     if (requestParameters.includes("clientEmail")) newInvoice.clientEmail = req.body.clientEmail;
     if (requestParameters.includes("subtotalInvoice")) newInvoice.subtotalInvoice = req.body.subtotalInvoice;
     if (requestParameters.includes("totalTaxesInvoice")) newInvoice.totalTaxesInvoice = req.body.totalTaxesInvoice;
+    if (requestParameters.includes("totalInvoice")) newInvoice.totalInvoice = req.body.totalInvoice;
     if (requestParameters.includes("invoiceItems")) newInvoice.invoiceItems = req.body.invoiceItems;
     if (requestParameters.includes("paymentMethod")) newInvoice.paymentMethod = req.body.paymentMethod;
     if (requestParameters.includes("invoiceNumber")) newInvoice.invoiceNumber = req.body.invoiceNumber;

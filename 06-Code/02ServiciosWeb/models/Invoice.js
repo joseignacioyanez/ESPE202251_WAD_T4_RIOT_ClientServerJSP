@@ -26,6 +26,10 @@ const invoiceSchema = new mongoose.Schema({
         required: true,
         type: Decimal128
     },
+    totalInvoice:{
+        required: true,
+        type: Decimal128
+    },
     invoiceItems:{
         required: true,
         type: Array

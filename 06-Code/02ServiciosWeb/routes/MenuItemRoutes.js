@@ -1,4 +1,3 @@
-const { request } = require("express");
 const express = require("express");
 const router = express.Router();
 const MenuItem = require("../models/MenuItem")
@@ -119,10 +118,11 @@ router.delete("/menuItem/:code", async (req, res) => {
 })
 
 // Business Rule
-// POST - Send discount on a certain menuItem to a certain client for certain percentage
+// GET (To be used in browser) 
+// Send discount on a certain menuItem to a certain client for certain percentage
 
-// Code of the Whatsapp API heavily modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
-router.post('/menuItem/:code/discount/:percentage/client/:idCard', async function(req, res, next) {
+// Code of the Whatsapp API modified from https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/
+router.get('/menuItem/:code/discount/:percentage/client/:idCard', async function(req, res, next) {
     
     // Retrieve MenuItem 
     let menuItemName;
@@ -138,18 +138,20 @@ router.post('/menuItem/:code/discount/:percentage/client/:idCard', async functio
         discountPercentage = req.params.percentage;
         newPrice = originalPrice - (originalPrice*(discountPercentage*0.01));
     } catch (error) {
-        res.status(500).json({message:error.message});
+        res.status(500).json({message:error.message, why: "That MenuItem does not exist"});
     }
 
     // Retrieve Client Details
     let clientName;
     let clientCellphone;
     try {
-        const clientData = await Client.findOne({"idCard":req.params.idCard});
-        clientName = clientData.name;
-        clientCellphone = clientData.cellphone;
+        if(menuItemName != null && originalPrice != null && newPrice!=null){// To not send error status again if !menuItem
+            const clientData = await Client.findOne({"idCard":req.params.idCard});
+            clientName = clientData.name;
+            clientCellphone = clientData.cellphone;
+        }
     } catch (error) {
-        res.status(500).json({message:error.message});
+        res.status(500).json({message:error.message,  why: "That Client does not exist"});
     }
 
     // Message template to fill with Discount Details
@@ -157,15 +159,17 @@ router.post('/menuItem/:code/discount/:percentage/client/:idCard', async functio
 
     // Attach headers for Whatsapp API
     var data = getTextMessageInput(clientCellphone, message);
-    
-    sendMessage(data)
-      .then(function (response) {
-        res.sendStatus(200);
-        return;
-      })
-      .catch(function (error) {
-        console.log(error);
-        res.sendStatus(500);
-        return;
-      });
+
+    if(menuItemName != null && originalPrice != null && newPrice!=null && clientName!=null && clientCellphone!=null){ // To not send error status again
+        sendMessage(data)
+        .then(function (response) {
+          res.status(200).json({message:`Your offer to ${clientName} [${clientCellphone}] has been sent correctly!`});
+          return;
+        })
+        .catch(function (error) {
+          res.status(500).json({message:error.message});
+          return;
+        });
+    }
+
   });

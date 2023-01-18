@@ -20,11 +20,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.8.0",
-<<<<<<< HEAD
     "mongoose-long": "^0.6.0",
     "nodemailer": "^6.8.0",
-=======
->>>>>>> 0325db872f0b15fb0648c13cefc07eda1f26b151
     "nodemon": "^2.0.20"
   }
 }

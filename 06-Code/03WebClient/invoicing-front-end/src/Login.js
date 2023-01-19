@@ -2,22 +2,26 @@
 // Based on: https://www.youtube.com/watch?v=X3qyxo_UTR4
 // This example is interesting because it is very complete
 // It considers things like Accesibility and Screen Readers
-
 import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from './context/AuthProvider';
+import useAuth from './hooks/useAuth';
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import axios from "./api/axios";
-const LOGIN_URL = "/auth";
+const LOGIN_URL = "/login";
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -29,24 +33,37 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user,pwd);
-        setUser('');
-        setPwd('');
-        setSuccess(true);
+
+        try {
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({username: user, passwordHash: pwd}), // Lo que espera la API Rest de Autenticacion
+                {
+                    headers: { 'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            const accessToken = response?.data?.accessToken;
+            const role = response?.data?.role;
+            setAuth({ user, pwd, role, accessToken })
+            setUser('');
+            setPwd('');
+            navigate(from, { replace: true });
+        } catch (error) {
+            if(!error?.response) {
+                setErrMsg("No Server Response");
+            }else if(error.response?.status === 400) {
+                setErrMsg("Missing Username and Password");
+            } else if (error.response?.status === 401) {
+                setErrMsg("Unathorized");
+            } else {
+                setErrMsg("Login failed");
+            }
+            errRef.current.focus();
+        }
     }
     
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <a href="#">Go to Home</a>
-                    </p>
-                </section>
-            ) : (
-
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
@@ -72,9 +89,6 @@ const Login = () => {
                 <button>Sign In</button>
             </form>
         </section>
-
-        )}
-        </>    
     )
 }
 

@@ -18,8 +18,10 @@ const usersSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    type:{
-        required: true,
+    roles:{
+        type: Object
+    },
+    refreshToken:{
         type: String
     }
 })

@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../models/Users")
 
+
 module.exports = router;
 
 // GET all the users
@@ -37,11 +38,22 @@ router.post("/users", async (req,res) => {
         type: req.body.type
     })
 
-    try {
-        const usersToSave = await newUsers.save();
-        res.status(200).json({message: "Succesfully Created new Users", usersToSave})
-    } catch (error) {
-        res.status(500).json({message: error.message})
+    const user = await Users.findOne({"username": req.body.username});
+    if(user){
+        console.log("It exists");
+    }else{
+        console.log("It is new");
+    }
+
+    if(!user){
+        try {
+            const usersToSave = await newUsers.save();
+            res.status(200).json({message: "Succesfully Created new Users", usersToSave})
+        } catch (error) {
+            res.status(500).json({message: error.message})
+        }
+    }else{
+        res.status(409).json({"error": "Username Already existed"})
     }
 })
 

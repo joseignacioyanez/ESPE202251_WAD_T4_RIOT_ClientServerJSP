@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Client = require("../models/Client") 
 const Invoice = require("../models/Invoice") // For business Rule
+const verifyJWT = require('../middleware/verifyJWT') // For autenthication
 
 module.exports = router;
 
 // GET all the Clients
-router.get("/clients", async (req, res) => {
+router.get( "/clients", verifyJWT, async (req, res) => {
     try {
         const clientsData = await Client.find();
         res.status(200).json(clientsData);

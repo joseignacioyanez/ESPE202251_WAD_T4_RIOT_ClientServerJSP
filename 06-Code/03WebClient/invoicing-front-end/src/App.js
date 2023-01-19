@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import LinkPage from './components/LinkPage';
 import Admin from './components/Admin';
+import Unauthorized from './components/Unauthorized';
 
 function App() {
   return (
@@ -12,12 +13,16 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
         <Route path='login' element={<Login />} />
-        <Route path='link' element={<LinkPage />} />
+        <Route path='linkpage' element={<LinkPage />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
         {/* Protected Routes */}
-        <Route element={<RequireAuth />}>
+        <Route element={<RequireAuth allowedRoles={[1000]}/>}>
           <Route path="/" element={<Home />} />
-          <Route path="admin" element={<Admin />} />
         </Route>
+
+        <Route element={<RequireAuth allowedRoles={[9999]}/>}>
+          <Route path="/admin" element={<Admin />} />
+        </Route>        
       </Route>
     </Routes>
   );

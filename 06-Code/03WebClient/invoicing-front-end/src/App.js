@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import LinkPage from './components/LinkPage';
 import Admin from './components/Admin';
+import Cashier from './components/Cashier';
+import AdminClients from './components/AdminClients';
 import Unauthorized from './components/Unauthorized';
 
 function App() {
@@ -22,7 +24,12 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={[9999]}/>}>
           <Route path="/admin" element={<Admin />} />
-        </Route>        
+          <Route path='/adminClients' element={<AdminClients />}/>
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[1984, 9999]} />} >
+          <Route path="cashier" element={<Cashier />} />
+        </Route>
       </Route>
     </Routes>
   );

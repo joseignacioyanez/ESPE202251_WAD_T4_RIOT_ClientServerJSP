@@ -15,14 +15,15 @@ const Home = () => {
 
     return (
         <section>
-            <h1>Home</h1>
+            <h1>Inicio</h1>
             <br />
-            <p>You are logged in!</p>
+            <p>Ha iniciado sesión!</p>
             <br />
-            <Link to="/admin">Go to the Admin page</Link>
+            <Link to="/admin">Ir al Menú de Administrador</Link>
+            <Link to="/cashier">Ir a Facturación</Link>
 
             <div className="flexGrow">
-                <button onClick={logout}>Sign Out</button>
+                <button onClick={logout}>Cerrar Sesión</button>
             </div>
         </section>
     )

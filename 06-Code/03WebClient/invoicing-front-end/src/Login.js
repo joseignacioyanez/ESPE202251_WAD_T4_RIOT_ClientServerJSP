@@ -66,10 +66,12 @@ const Login = () => {
     return (
 
         <section>
+            <img src={require('./logoRestaurant.jpg')} alt="Logo" />
+            <br />
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
+            <h1>Iniciar Sesión</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Nombre de Usuario:</label>
                 <input
                     type="text"
                     id="username"
@@ -80,7 +82,7 @@ const Login = () => {
                     required
                 />
 
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Contraseña:</label>
                 <input
                     type="password"
                     id="password"
@@ -88,7 +90,7 @@ const Login = () => {
                     value={pwd}
                     required
                 />
-                <button>Sign In</button>
+                <button>Iniciar Sesión</button>
             </form>
         </section>
 

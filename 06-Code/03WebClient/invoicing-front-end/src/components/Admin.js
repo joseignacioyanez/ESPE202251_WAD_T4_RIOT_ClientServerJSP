@@ -3,11 +3,15 @@ import { Link } from "react-router-dom"
 const Admin = () => {
     return (
         <section>
-            <h1>Admins Page</h1>
+            <h1>Menú del Administrador</h1>
             <br />
-            <p>You must have been assigned an Admin role.</p>
+            <p>Usted tiene el Rol de Administrador.</p>
+            <br/>
             <div className="flexGrow">
-                <Link to="/">Home</Link>
+                <Link to="/adminClients">Administrar Clientes</Link><br/>
+                <Link to="/adminMenu">Administrar el Menú</Link><br/>
+                <Link to="/adminInvoices">Administrar Facturas</Link><br/>
+                <Link to="/adminUsers">Administrar Usuarios</Link>
             </div>
         </section>
     )

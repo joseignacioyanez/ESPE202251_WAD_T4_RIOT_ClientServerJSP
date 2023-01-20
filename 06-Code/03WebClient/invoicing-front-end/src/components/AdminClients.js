@@ -1,63 +1,50 @@
 import { Link } from "react-router-dom";
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { useDemoData } from '@mui/x-data-grid-generator';
+import axios from '../api/axios';
+const URI = '/restaurant/users';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
+export default async function AdminClients()  {
+    const { data } = useDemoData({
+        dataSet: 'Commodity',
+        rowLength: 100,
+        maxColumns: 18,
+    });
+    /*
+    // API
+    try {
+        const response = await axios.post(URI,
+            JSON.stringify(),
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
+            
+        );
+        console.log(JSON.stringify(response?.data));
+        } catch (error){
+            console.log(error);
+        }
+    
+    
+    
 
-  const rows = [
-    createData('Fernando Fernandez', 159, 6.0, 24, 4.0),
-    createData('Elba Lazo', 237, 9.0, 37, 4.3),
-    createData('Elza Pato', 262, 16.0, 24, 6.0),
-    createData('Juan Juanes', 305, 3.7, 67, 4.3),
-    createData('Federico Fritz', 356, 16.0, 49, 3.9),
-  ];
-  
-
-const AdminClients = () => {
+    console.log(data)
+        */
     return (
         <>
             <h1>Administrar Clientes</h1>
             <br/><br/>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Cédula</TableCell>
-                        <TableCell align="right">Nombre</TableCell>
-                        <TableCell align="right">Email</TableCell>
-                        <TableCell align="right">Modificar</TableCell>
-                        <TableCell align="right">Eliminar</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {rows.map((row) => (
-                        <TableRow
-                        key={row.name}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row">
-                            {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <div style={{ height: 600, width: '100%' }}>
+                <DataGrid
+                    {...data}
+                    components={{
+                    Toolbar: GridToolbar,
+                    }}
+                />
+            </div>
             <button>Crear Nuevo Cliente</button>
         </>
     )
 }
-
-export default AdminClients

@@ -73,6 +73,24 @@ const TableAPI = (props) => {
         align: "center",
       },
       {
+        field: "id",
+        headerClassName: "super-app-theme--header",
+        headerName: "ID",
+        headerAlign: "center",
+        minWidth: 130,
+        align: "center",
+        renderCell: (params) => (
+          <IconButton
+            color="inherit"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://journals.plos.org/plosone/article?id=${params.id}`}
+          >
+            <OpenInNewIcon>{params.id}</OpenInNewIcon>
+          </IconButton>
+        ),
+      },
+      {
         field: "journal",
         headerClassName: "super-app-theme--header",
         headerName: "Revista",
@@ -123,7 +141,7 @@ const TableAPI = (props) => {
       {
         field: "id",
         headerClassName: "super-app-theme--header",
-        headerName: "Ver Publicacion",
+        headerName: "ID",
         headerAlign: "center",
         minWidth: 130,
         align: "center",

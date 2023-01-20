@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 110%",
     backgroundAttachment: "fixed",
-    backgroundColor: "#d4c4fb",
+    backgroundColor: "#F3BBE6",
     width: "100%",
     height: "110%",
     position: "absolute",

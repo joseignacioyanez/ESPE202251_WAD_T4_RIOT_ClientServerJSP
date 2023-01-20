@@ -115,6 +115,7 @@ const NavigationAdmin = () => {
               }}
               onClick={handleInformation}
             >
+              
               Informacion de la Maquina Cliente
             </Button>
           </Box>
@@ -128,6 +129,7 @@ const NavigationAdmin = () => {
               color="inherit"
               onClick={handleMenuAdmin}
             >
+              
               {" "}
             </IconButton>
           </Box>

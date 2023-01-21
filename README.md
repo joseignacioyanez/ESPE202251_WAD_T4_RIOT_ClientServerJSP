@@ -6,14 +6,18 @@
 - https://docs.google.com/document/d/1kAr3sQDLYC0sCFcsfov5uPhIbVKpe2_POw_vqT5w8b4/edit?usp=sharing
 
 ### Deployed to personal ☁️ for now and Accessible to test via:
+
+### Part 1 - Scientific Papers API Front End
+-- **FrontEnd:** http://34.105.52.36:3001/
+
 #### Part 2 - Invoicing System for a Business
-- **BackEnd**: http://34.127.120.76:3005/login 
+- **BackEnd:** http://44.211.70.232:3005/login
   - You can make a POST request to /login with:
   - username: jiyf
   - passwordHash: jiyf
   - You'll get a Token to be set as Bearer Token
   - And now you can access routes like /restaurant/clients for a couple of minutes
-- **FrontEnd**: http://34.127.120.76:3000/
+- **FrontEnd:** http://34.105.52.36:3002/
 
 
 ### Images

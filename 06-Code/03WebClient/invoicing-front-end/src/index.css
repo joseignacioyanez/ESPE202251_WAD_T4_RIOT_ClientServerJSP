@@ -9,12 +9,13 @@
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 22px;
-    color: #fff;
+    color: #111;
 }
 
 body {
     min-height: 100vh;
-    background-color: rgb(179, 162, 106);
+    /*background-color: rgb(179, 162, 106);*/
+    background-color: #fff;
 }
 
 .App {
@@ -34,7 +35,7 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     padding: 1rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.3);
 }
 
 form {
@@ -46,26 +47,29 @@ form {
 }
 
 a, a:visited {
-    color: #fff;
+    color: #111;
 }
 
 input[type="text"],
 input[type="password"],
+input[type="number"],
 button,
 textarea {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
 }
 
 label,
 button {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 button {
-  padding: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgb(144,30,56);
+    color: white;
 }
 
 .instructions {
@@ -111,4 +115,66 @@ button {
 
 .line {
     display: inline-block;
+}
+.logo{
+    width: 25vw;
+    align-self: center;
+}
+
+.menuButton{
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;
+    align-items: center;
+    border: #000;
+    border-style: solid;
+    border-width: 2px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+
+    align-content: space-around;
+
+    min-height: 80px;
+    max-height: 25vh;
+
+    margin: 20px 0px;
+    padding: 0.5rem;
+    background-color: rgb(144,30,56);
+    text-decoration: none;
+}
+
+.menuButton > span{
+    color: #fff;
+
+}
+
+.iconMenu{
+    font-size: 100px;
+}
+
+.adminMenuContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.adminMenuContainer > div > a{
+    margin: 30px;
+}
+
+.dataGrid{
+    width: 75%;
+}
+/* Modified from https://stackoverflow.com/questions/306924/can-i-change-the-checkbox-size-using-css */
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+  margin-left: 25px;
 }

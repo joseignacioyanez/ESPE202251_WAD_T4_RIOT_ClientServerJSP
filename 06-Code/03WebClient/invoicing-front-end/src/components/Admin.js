@@ -1,22 +1,48 @@
+// Author: Jose Ignacio Yanez
 import { Link } from "react-router-dom";
-import Users from "./Users";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPeopleGroup, faUsers, faUtensils, faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
+
 
 const Admin = () => {
+    let navigate = useNavigate();
+
     return (
-        <section>
+        <>
             <h1>Menú del Administrador</h1>
             <br />
             <p>Usted tiene el Rol de Administrador.</p>
             <br/>
-            <Users />
-            <br />
+
             <div className="flexGrow">
-                <Link to="/adminClients">Administrar Clientes</Link><br/>
-                <Link to="/adminMenu">Administrar el Menú</Link><br/>
-                <Link to="/adminInvoices">Administrar Facturas</Link><br/>
-                <Link to="/adminUsers">Administrar Usuarios</Link>
+                <div className="adminMenuContainer">
+                    <div>
+                        <Link to="/adminClients" className="menuButton">
+                            <FontAwesomeIcon icon={faPeopleGroup} style={{color:'#fff'}} size={'3x'} />
+                            <span>Administrar Clientes</span>
+                        </Link>
+
+                        <Link to="/adminMenuItems" className="menuButton">
+                            <FontAwesomeIcon icon={faUtensils} style={{color:'#fff'}} size={'3x'} />
+                            <span>Administrar el Menú</span>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/adminInvoices" className="menuButton">
+                            <FontAwesomeIcon icon={faFileInvoiceDollar} style={{color:'#fff'}} size={'3x'} />
+                            <span>Administrar Facturas</span>
+                        </Link>
+
+                        <Link to="/adminUsers" className="menuButton">
+                            <FontAwesomeIcon icon={faUsers} style={{color:'#fff'}} size={'3x'} />
+                            <span>Administrar Usuarios</span>
+                        </Link>
+                    </div>
+                </div>
             </div>
-        </section>
+            <button onClick={() => navigate(-1)}>Volver</button>
+        </>
     )
 }
 

@@ -66,7 +66,7 @@ const Login = () => {
     return (
 
         <section>
-            <img src={require('./logoRestaurant.jpg')} alt="Logo" />
+            <img src={require('./logoRestaurantTrans.png')} alt="Logo" className='logo'/>
             <br />
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Iniciar Sesión</h1>

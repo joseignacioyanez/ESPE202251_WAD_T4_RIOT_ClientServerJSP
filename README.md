@@ -8,7 +8,7 @@
 ### Deployed to personal ☁️ for now and Accessible to test via:
 
 ### Part 1 - Scientific Papers API Front End
--- **FrontEnd:** http://34.105.52.36:3001/
+-- **FrontEnd:** [http://34.105.52.36:3001/](http://34.105.52.36:3001/)
 
 #### Part 2 - Invoicing System for a Business
 - **BackEnd:** http://44.211.70.232:3005/login
@@ -17,13 +17,15 @@
   - passwordHash: jiyf
   - You'll get a Token to be set as Bearer Token
   - And now you can access routes like /restaurant/clients for a couple of minutes
-- **FrontEnd:** http://34.105.52.36:3002/
+- **FrontEnd:** [http://34.105.52.36:3002/](http://34.105.52.36:3002/)
 
 
 ### Images
 **Front End React**
 
-![Front End](https://i.imgur.com/zEGx32C.png)
+![Front End](https://i.imgur.com/wRCBSEb.png)
+![Front End](https://i.imgur.com/16b83KB.png)
+![Front End](https://i.imgur.com/N4zAfSb.png)
 
 **Auth with JWT, Cookies and Roles**
 
@@ -33,7 +35,11 @@
 
 **Front End Route Protection with Back End API**
 
-![Front End](https://i.imgur.com/fxd4CQC.png)
+![Front End](https://i.imgur.com/wJtzB6c.png)
+
+**Front End Scientific Papers API**
+![Front End](https://i.imgur.com/rf4DGv3.png)
+![Front End](https://i.imgur.com/Lkcq7m1.png)
 
 
 ## Activity 2️⃣ - REST API with Nodejs and MongoDB on AWS EC2

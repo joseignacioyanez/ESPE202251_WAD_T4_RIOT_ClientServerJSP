@@ -37,7 +37,7 @@ const AdminMenu = () => {
                             code: menu.code,
                             category: menu.category,
                             name: menu.name,
-                            price: menu.price,
+                            price: menu.price.$numberDecimal,
                             paysTaxes: menu.paysTaxes
                         }
                     )));

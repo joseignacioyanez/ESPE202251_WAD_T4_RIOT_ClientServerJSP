@@ -35,7 +35,7 @@ const AdminInvoices = () => {
                             clientIDCard: invoice.clientIDCard,
                             orderToGo: invoice.orderToGo,
                             invoiceDate: invoice.invoiceDate,
-                            totalInvoice: invoice.totalInvoice,
+                            totalInvoice: invoice.totalInvoice.$numberDecimal,
                             paymentState: invoice.paymentState
                         }
                     )));

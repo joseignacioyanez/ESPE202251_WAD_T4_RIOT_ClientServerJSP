@@ -14,6 +14,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import NewUser from './components/NewUser';
 import NewClient from './components/NewClient';
 import NewMenuItem from './components/NewMenuItem';
+import ModifyClient from './components/ModifyClient';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={[9999]}/>}>
           <Route path="/admin" element={<Admin />} />
           <Route path='/adminClients' element={<AdminClients />}/>
-          <Route path='/modifyClient' />
+          <Route path='/modifyClient' element={<ModifyClient />}/>
           <Route path='/deleteClient' />
           <Route path='/newClient' element={<NewClient />}/>
           <Route path='/adminUsers' element={<AdminUsers />}/>

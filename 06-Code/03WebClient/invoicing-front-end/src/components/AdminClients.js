@@ -22,12 +22,10 @@ const AdminClients = () => {
     useEffect(() => {
     
         if (effectRan.current === false){
-            const controller = new AbortController(); // To Cancel request if component unmounts
 
-            const getUsers = async () => {
+            const getClients = async () => {
                 try {
                     const response = await axiosPrivate.get('/restaurant/clients', {
-                        //signal: controller.signal
                     });
                     console.log(response.data)
                     // If Component isMounted, set data and map it for rows DataGrid
@@ -51,10 +49,9 @@ const AdminClients = () => {
                 }
             }
 
-            getUsers();
+            getClients();
             // Cleanup function
             return () => {
-                controller.abort();
                 effectRan.current = true;
             }
         }
@@ -62,10 +59,15 @@ const AdminClients = () => {
     }, [])
 
     // DataGrid
-    const ModifyButton = () => {
+    const ModifyButton = (params) => {
         const navigate = useNavigate();  
+
+        function handleModify() {
+            navigate("/modifyClient", {state:{idCard:params.row.idCard}})
+        }
+
         return (
-            <Button onClick={() => navigate("/modifyClient")} sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
+            <Button onClick={ handleModify } sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
         );
     };
     const DeleteButton = () => {
@@ -82,7 +84,7 @@ const AdminClients = () => {
         { field:'address', headerName:'Dirección', width: 300 },
         { field:'cellphone', headerName:'Teléfono', width: 200 },
         { field:'email', headerName:'Mail', width: 300 },
-        { field:'modifyButton', headerName:'Modificar', width:150, renderCell: () => <ModifyButton/> },
+        { field:'modifyButton', headerName:'Modificar', width:150, renderCell: ModifyButton },
         { field:'deleteButton', headerName:'Borrar', width:150, renderCell: () => <DeleteButton/> }
     ];
 
@@ -100,7 +102,7 @@ const AdminClients = () => {
                 <DataGrid columns={columns} rows={clients} className="dataGrid" sx={{alignSelf:"center"}}/>
             </Grid>
             <br/>
-            <Button onClick={() => {navigate(-1)}} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
+            <Button onClick={() => navigate(-1)} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
         </>
     );
 }

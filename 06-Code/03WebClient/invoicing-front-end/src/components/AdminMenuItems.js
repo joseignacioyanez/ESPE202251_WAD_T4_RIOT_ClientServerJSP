@@ -21,12 +21,10 @@ const AdminMenu = () => {
     useEffect(() => {
     
         if (effectRan.current === false){
-            const controller = new AbortController(); // To Cancel request if component unmounts
 
             const getMenu = async () => {
                 try {
                     const response = await axiosPrivate.get('/restaurant/menuItems', {
-                        //signal: controller.signal
                     });
                     console.log(response.data)
                     // If Component isMounted, set data and map it for rows DataGrid
@@ -51,7 +49,6 @@ const AdminMenu = () => {
             getMenu();
             // Cleanup function
             return () => {
-                controller.abort();
                 effectRan.current = true;
             }
         }
@@ -59,10 +56,15 @@ const AdminMenu = () => {
     }, []) 
     
     // DataGrid
-    const ModifyButton = () => {
+    const ModifyButton = (params) => {
         const navigate = useNavigate();  
+
+        function handleModify() {
+            navigate("/modifyMenuItem", {state:{code:params.row.code}})
+        }
+
         return (
-            <Button onClick={() => navigate("/modifyMenuItem")} sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
+            <Button onClick={handleModify} sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
         );
     };
     const DeleteButton = () => {
@@ -80,7 +82,7 @@ const AdminMenu = () => {
         { field:'name', headerName:'Nombre', width: 300 },
         { field:'price', headerName:'Precio', width: 170 },
         { field:'paysTaxes', headerName:'Impuestos', width: 170 },
-        { field:'modifyButton', headerName:'Modificar', width:150, renderCell: () => <ModifyButton/> },
+        { field:'modifyButton', headerName:'Modificar', width:150, renderCell: ModifyButton },
         { field:'deleteButton', headerName:'Borrar', width:150, renderCell: () => <DeleteButton/> }
     ];
 
@@ -98,7 +100,7 @@ const AdminMenu = () => {
                 <DataGrid columns={columns} rows={menu} className="dataGrid" sx={{alignSelf:"center"}}/>
             </Grid>
             <br/>
-            <Button onClick={() => {navigate(-1)}} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
+            <Button onClick={() => {navigate("/admin")}} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
         </>
     );
 }

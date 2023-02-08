@@ -104,6 +104,7 @@ const ModifyClient = () => {
         }
 
         updateClient();
+        // Based on https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep to give time for change
         await new Promise(r => setTimeout(r, 1000));
         navigate("/adminClients");
     }

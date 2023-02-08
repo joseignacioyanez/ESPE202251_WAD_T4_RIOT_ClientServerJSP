@@ -15,6 +15,7 @@ import NewUser from './components/NewUser';
 import NewClient from './components/NewClient';
 import NewMenuItem from './components/NewMenuItem';
 import ModifyClient from './components/ModifyClient';
+import ModifyMenuItem from './components/ModifyMenuItem';
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route path='/modifyInvoice' />
           <Route path='/deleteInvoice' />
           <Route path='/adminMenuItems' element={<AdminMenuItems />}/>
-          <Route path='/modifyMenuItem' />
+          <Route path='/modifyMenuItem' element={<ModifyMenuItem />}/>
           <Route path='/deleteMenuItem' />
           <Route path='/newMenuItem' element={<NewMenuItem />}/>
         </Route>

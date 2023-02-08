@@ -86,7 +86,6 @@ router.put("/users/:username", async (req, res) => {
     if (requestParameters.includes("fullName")) newUsers.fullName = req.body.fullName;
     if (requestParameters.includes("email")) newUsers.email = req.body.email;
     if (requestParameters.includes("username")) newUsers.username = req.body.username;
-    if (requestParameters.includes("type")) newUsers.type = req.body.type;
 
     // Do the Updating
     try {

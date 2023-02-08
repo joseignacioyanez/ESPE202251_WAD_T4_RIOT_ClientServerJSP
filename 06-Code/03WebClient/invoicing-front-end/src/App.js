@@ -16,6 +16,7 @@ import NewClient from './components/NewClient';
 import NewMenuItem from './components/NewMenuItem';
 import ModifyClient from './components/ModifyClient';
 import ModifyMenuItem from './components/ModifyMenuItem';
+import ModifyUser from './components/ModifyUser';
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
           <Route path='/deleteClient' />
           <Route path='/newClient' element={<NewClient />}/>
           <Route path='/adminUsers' element={<AdminUsers />}/>
-          <Route path='/modifyUser' />
+          <Route path='/modifyUser' element={<ModifyUser />}/>
           <Route path='/deleteUser' />
           <Route path='/newUser' element={<NewUser />}/>
           <Route path='/adminInvoices' element={<AdminInvoices />}/>

@@ -56,10 +56,15 @@ const AdminUsers = () => {
     }, []) 
 
     // DataGrid
-    const ModifyButton = () => {
+    const ModifyButton = (params) => {
         const navigate = useNavigate();  
+
+        function handleModify() {
+            navigate("/modifyUser", {state:{username:params.row.username}})
+        }
+
         return (
-            <Button onClick={() => navigate("/modifyUser")} sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
+            <Button onClick={ handleModify } sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
         );
     };
     const DeleteButton = () => {
@@ -74,7 +79,7 @@ const AdminUsers = () => {
         { field:'fullName', headerName:'Nombre', width: 300},
         { field:'email', headerName:'Email', width: 350 },
         { field:'username', headerName:'Usuario', width: 150 },
-        { field:'modifyButton', headerName:'Modificar', width:150, renderCell: () => <ModifyButton/> },
+        { field:'modifyButton', headerName:'Modificar', width:150, renderCell: ModifyButton },
         { field:'deleteButton', headerName:'Borrar', width:150, renderCell: () => <DeleteButton/> }
     ];
 
@@ -92,7 +97,7 @@ const AdminUsers = () => {
                 <DataGrid columns={columns} rows={users} className="dataGrid" sx={{alignSelf:"center"}}/>
             </Grid>
             <br/>
-            <Button onClick={() => {navigate(-1)}} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
+            <Button onClick={() => {navigate("/admin")}} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
         </>
     );
 }

@@ -124,7 +124,7 @@ const ModifyMenuItem = () => {
     return (
 
         <section>
-            <h1>Nuevo Ítem de Menú</h1>
+            <h1>Modificar Ítem de Menú</h1>
             <form>
 
             <span>

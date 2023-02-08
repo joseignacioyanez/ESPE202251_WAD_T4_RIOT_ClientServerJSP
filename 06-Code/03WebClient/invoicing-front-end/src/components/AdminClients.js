@@ -102,7 +102,7 @@ const AdminClients = () => {
                 <DataGrid columns={columns} rows={clients} className="dataGrid" sx={{alignSelf:"center"}}/>
             </Grid>
             <br/>
-            <Button onClick={() => navigate(-1)} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
+            <Button onClick={() => navigate("/admin")} sx={{background:'rgb(144,30,56)', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Volver</Button>
         </>
     );
 }

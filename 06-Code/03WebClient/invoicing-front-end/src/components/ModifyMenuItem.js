@@ -145,6 +145,7 @@ const ModifyMenuItem = () => {
                     autoComplete="off"
                     defaultValue={menuItem.code}
                     onChange={handleCodeChange}
+                    readOnly
                     required
                 />
 

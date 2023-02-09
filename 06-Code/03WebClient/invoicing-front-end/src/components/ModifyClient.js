@@ -146,6 +146,7 @@ const ModifyClient = () => {
                     autoComplete="off"
                     defaultValue={client.idCard}
                     onChange = { handleIdCardChange }
+                    readOnly
                     required
                 />
                 <label htmlFor="cellphone">Teléfono:</label>

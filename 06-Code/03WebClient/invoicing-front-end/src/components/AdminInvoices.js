@@ -15,6 +15,8 @@ const AdminInvoices = () => {
     const effectRan = useRef(false)
 
     const [isLoading, setLoading ] = useState(true);
+    const [ isDeleting, setDeleting ] = useState(false);
+
     const navigate = useNavigate();
 
     // Get data
@@ -36,7 +38,8 @@ const AdminInvoices = () => {
                             orderToGo: invoice.orderToGo,
                             invoiceDate: invoice.invoiceDate,
                             totalInvoice: invoice.totalInvoice.$numberDecimal,
-                            paymentState: invoice.paymentState
+                            paymentState: invoice.paymentState,
+                            invoiceNumber: invoice.invoiceNumber
                         }
                     )));
                     setLoading(false);
@@ -50,7 +53,7 @@ const AdminInvoices = () => {
                 effectRan.current = true;
             }
         }
-    }, [])
+    }, [isDeleting])
 
     // DataGrid
     const ModifyButton = () => {
@@ -59,26 +62,52 @@ const AdminInvoices = () => {
             <Button onClick={() => navigate("/modifyInvoice")} sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
         );
     };
-    const DeleteButton = () => {
-        const navigate = useNavigate();  
+    const DeleteButton = (params) => {
+
+        async function handleDelete() {
+            //Get username to delete
+            setDeleting(true)
+
+            const invoiceNumberDelete = params.row.invoiceNumber;
+
+            const deleteMenuItem= async () => {
+                try {
+                    await axiosPrivate.delete(`/restaurant/invoice/${invoiceNumberDelete}`);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    // Wait
+                    await new Promise(r => setTimeout(r, 1500));
+                    setDeleting(false)
+                    effectRan.current = false;
+                }
+            }
+            deleteMenuItem();
+        }
+
         return (
-            <Button onClick={() => navigate("/deleteInvoice")} sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
+            <Button onClick={ handleDelete } sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
         );
     };
 
     const columns = [
         { field:'id', hide: true },
+        { field:'invoiceNumber', hide: true },
         { field:'clientIDCard', headerName:'Cliente', width: 200},
         { field:'orderToGo', headerName:'¿Para Llevar?', width: 150 },
         { field:'invoiceDate', headerName:'Fecha', width: 170 },
         { field:'totalInvoice', headerName:'Total', width: 150 },
         { field:'paymentState', headerName:'Estado de Pago', width: 180 },
         { field:'modifyButton', headerName:'Modificar', width:150, renderCell: () => <ModifyButton/> },
-        { field:'deleteButton', headerName:'Borrar', width:150, renderCell: () => <DeleteButton/> }
+        { field:'deleteButton', headerName:'Borrar', width:150, renderCell: DeleteButton }
     ];
 
     if (isLoading) {
         return <><h1>Cargando...</h1></>
+    }
+
+    if (isDeleting){
+        return <><h1>Borrando...</h1></>
     }
 
     return (

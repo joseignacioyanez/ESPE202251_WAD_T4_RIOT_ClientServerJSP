@@ -16,17 +16,43 @@ function sendMessage(data) {
 }
 
 function getTextMessageInput(recipient, text) {
-  return JSON.stringify({
+  return JSON.stringify({ 
     "messaging_product": "whatsapp",
-    "to": Number.parseInt(recipient),
-    "type": "text",
-    "text": {
-      "body": text
-    }
-  });
+    "to": `${recipient}`, 
+    "type": "template", 
+    "template": 
+    { "name": "hello_world", 
+    "language": 
+    { "code": "en_US" } 
+  } 
+});
 }
 
 module.exports = {
   sendMessage: sendMessage,
   getTextMessageInput: getTextMessageInput
 };
+
+/*
+{
+    "messaging_product": "whatsapp",
+    "to": `${recipient}`,
+    "type": "text",
+    "text": {
+      "body": text
+    }
+  }
+*/
+
+/*
+{ 
+    "messaging_product": "whatsapp",
+    "to": `${recipient}`, 
+    "type": "template", 
+    "template": 
+    { "name": "hello_world", 
+    "language": 
+    { "code": "en_US" } 
+  } 
+}
+*/

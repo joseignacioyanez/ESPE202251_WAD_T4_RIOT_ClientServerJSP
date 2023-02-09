@@ -34,18 +34,14 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path='/adminClients' element={<AdminClients />}/>
           <Route path='/modifyClient' element={<ModifyClient />}/>
-          <Route path='/deleteClient' />
           <Route path='/newClient' element={<NewClient />}/>
           <Route path='/adminUsers' element={<AdminUsers />}/>
           <Route path='/modifyUser' element={<ModifyUser />}/>
-          <Route path='/deleteUser' />
           <Route path='/newUser' element={<NewUser />}/>
           <Route path='/adminInvoices' element={<AdminInvoices />}/>
           <Route path='/modifyInvoice' />
-          <Route path='/deleteInvoice' />
           <Route path='/adminMenuItems' element={<AdminMenuItems />}/>
           <Route path='/modifyMenuItem' element={<ModifyMenuItem />}/>
-          <Route path='/deleteMenuItem' />
           <Route path='/newMenuItem' element={<NewMenuItem />}/>
         </Route>
 

@@ -15,6 +15,7 @@ const AdminClients = () => {
     const effectRan = useRef(false)
 
     const [isLoading, setLoading ] = useState(true);
+    const [ isDeleting, setDeleting ] = useState(false);
 
     const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ const AdminClients = () => {
             }
         }
         
-    }, [])
+    }, [isDeleting])
 
     // DataGrid
     const ModifyButton = (params) => {
@@ -70,10 +71,31 @@ const AdminClients = () => {
             <Button onClick={ handleModify } sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
         );
     };
-    const DeleteButton = () => {
-        const navigate = useNavigate();  
+    const DeleteButton = (params) => {
+
+        async function handleDelete() {
+            //Get username to delete
+            setDeleting(true)
+
+            const idCardDelete = params.row.idCard;
+
+            const deleteClient = async () => {
+                try {
+                    await axiosPrivate.delete(`/restaurant/client/${idCardDelete}`);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    // Wait
+                    await new Promise(r => setTimeout(r, 1500));
+                    setDeleting(false)
+                    effectRan.current = false;
+                }
+            }
+            deleteClient();
+        }
+
         return (
-            <Button onClick={() => navigate("/deleteClient")} sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
+            <Button onClick={handleDelete} sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
         );
     };
     
@@ -85,11 +107,15 @@ const AdminClients = () => {
         { field:'cellphone', headerName:'Teléfono', width: 200 },
         { field:'email', headerName:'Mail', width: 300 },
         { field:'modifyButton', headerName:'Modificar', width:150, renderCell: ModifyButton },
-        { field:'deleteButton', headerName:'Borrar', width:150, renderCell: () => <DeleteButton/> }
+        { field:'deleteButton', headerName:'Borrar', width:150, renderCell:DeleteButton }
     ];
 
     if (isLoading) {
         return <><h1>Cargando...</h1></>
+    }
+
+    if (isDeleting) {
+        return <><h1>Borrando...</h1></>
     }
 
     return (

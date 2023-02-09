@@ -14,6 +14,7 @@ const AdminUsers = () => {
     const effectRan = useRef(false)
 
     const [isLoading, setLoading ] = useState(true);
+    const [ isDeleting, setDeleting ] = useState(false);
 
     const navigate = useNavigate();
 
@@ -53,7 +54,7 @@ const AdminUsers = () => {
             }
         }
         
-    }, []) 
+    }, [isDeleting]) 
 
     // DataGrid
     const ModifyButton = (params) => {
@@ -67,10 +68,31 @@ const AdminUsers = () => {
             <Button onClick={ handleModify } sx={{background:'#0087BD', color:"#fff", "&:hover": {color: '#fff', background: '#1F75FE'}, borderRadius: '0.5rem'}}>Modificar</Button>
         );
     };
-    const DeleteButton = () => {
-        const navigate = useNavigate();  
+    const DeleteButton = (params) => {
+
+        async function handleDelete() {
+            //Get username to delete
+            setDeleting(true)
+
+            const usernameDelete = params.row.username;
+
+            const deleteUser= async () => {
+                try {
+                    await axiosPrivate.delete(`/restaurant/users/${usernameDelete}`);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    // Wait
+                    await new Promise(r => setTimeout(r, 1500));
+                    setDeleting(false)
+                    effectRan.current = false;
+                }
+            }
+            deleteUser();
+        }
+
         return (
-            <Button onClick={() => navigate("/deleteUser")} sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
+            <Button onClick={handleDelete} sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
         );
     };
 
@@ -80,11 +102,15 @@ const AdminUsers = () => {
         { field:'email', headerName:'Email', width: 350 },
         { field:'username', headerName:'Usuario', width: 150 },
         { field:'modifyButton', headerName:'Modificar', width:150, renderCell: ModifyButton },
-        { field:'deleteButton', headerName:'Borrar', width:150, renderCell: () => <DeleteButton/> }
+        { field:'deleteButton', headerName:'Borrar', width:150, renderCell: DeleteButton }
     ];
 
     if (isLoading) {
         return <><h1>Cargando...</h1></>
+    }
+
+    if (isDeleting){
+        return <><h1>Borrando...</h1></>
     }
 
     return (
@@ -93,7 +119,7 @@ const AdminUsers = () => {
             <br/>
             <Button onClick={() => navigate("/newUser")} sx={{background:'#009F6B', color:"#fff", "&:hover": {color: '#fff', background: '#32CD32'}, borderRadius: '0.5rem'}}>Crear Nuevo Usuario</Button>
             <br/>
-            <Grid container justifyContent="center" sx={{ height: 500, width: '60%'}}> 
+            <Grid container justifyContent="center" sx={{ height: 500, width: '72%'}}> 
                 <DataGrid columns={columns} rows={users} className="dataGrid" sx={{alignSelf:"center"}}/>
             </Grid>
             <br/>

@@ -41,7 +41,7 @@ const Admin = () => {
                     </div>
                 </div>
             </div>
-            <button onClick={() => navigate(-1)}>Volver</button>
+            <button onClick={() => navigate("/")}>Volver</button>
         </>
     )
 }

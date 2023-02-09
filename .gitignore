@@ -27,6 +27,7 @@ hs_err_pid*
 **/.DS_Store
 
 **/package-lock.json
+package-lock.json
 
 
 # Para NodeJs

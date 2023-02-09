@@ -1,5 +1,84 @@
 # InvoicingSystem 🧾 - Team 5 - RIOT [RIOT Is Our Team] - ESPE_WAD
 
+## Activity 5️⃣ - React Front End for Node.js APIs Back End - Final Project
+
+### Google Doc:
+- https://docs.google.com/document/d/1dS-PXOtpPJJYucYZg-7XtyN4eijbNKl_hYrEf8sWHYE/edit?usp=sharing
+
+### Deployed to personal ☁️ for now and Accessible to test via:
+
+- **FrontEnd:** http://34.105.52.36:3005/
+
+To test the JWT Authentication with roles, you can use this credentials:
+
+| Username    |Password     |Roles                  |
+| ----------- | ----------- | --------------------- |
+| jiyf        | jiyf        |Admin + Cashier + User |
+| jyfc        | jiyfc       |Cashier + User         |
+| jiyfu       | jiyfu       |User                   |
+
+For the Final Project we had to finish implementing the BackEnd Services on the FrontEnd, these are the URIs that are implemented and their status. 
+
+| Number | Method | BackEnd URI used    (⭐️ Business Rule)                                | Status |
+| ------ | ------ | --------------------------------------------------------------------- | ------ |
+| 1      | POST   | ✨ /login                                                             | ✅     |
+| 2      | GET    | /restaurant/clients                                                   | ✅     |
+| 3      | GET    | /restaurant/users                                                     | ✅     |
+| 4      | GET    | /restaurant/menuItems                                                 | ✅     |
+| 5      | GET    | /restaurant/invoices                                                  | ✅     |
+| 6      | POST   | /restaurant/clients                                                   | ✅     |
+| 7      | POST   | ⭐️ /restaurant/users                                                  | ✅     |
+| 8      | POST   | /restaurant/menuItems                                                 | ✅     |
+| 9      | POST   | /restaurant/invoices                                                  | 🚧     |
+| 10     | PUT    | /restaurant/client/{idCard}                                           | ✅     |
+| 11     | PUT    | /restaurant/users/{username}                                          | ✅     |
+| 12     | PUT    | /restaurant/menuItem/{idCard}                                         | ✅     |
+| 13     | PUT    | /restaurant/invoice/{invoiceNumber}                                   | 🚧     |
+| 14     | DELETE | /restaurant/client/{idCard}                                           | ✅     |
+| 15     | DELETE | /restaurant/users/{username}                                          | ✅     |
+| 16     | DELETE | /restaurant/menuItem/{invoiceNumber}                                  | ✅     |
+| 17     | DELETE | /restaurant/invoice/{invoiceNumber}                                   | ✅     |
+| 18     | GET    | ⭐️ /restaurant/menuItem/{code}/discount/{percentage}/client/{idCard}  | ✅     |
+| 19     | GET    | ⭐️ /restaurant/client/{idCard}/report/                                | ✅     |
+
+
+- **BackEnd with JWT Authentication:** http://52.23.176.81:3005/login
+  - You can make a POST request using Postman to /login with:
+  - username: jiyf
+  - passwordHash: jiyf
+  - You'll get a Token to be set as Bearer Token
+  - And now you can access routes like /restaurant/clients for a couple of minutes
+
+
+
+
+### Images
+**Login**
+![Front End](https://i.imgur.com/li3AAec.png)
+
+**Home**
+![Front End](https://i.imgur.com/WBjAmH0.png)
+
+**Admin Menu**
+![Front End](https://i.imgur.com/bDH9nRD.png)
+
+**Clients Listing (GET)**
+![Front End](https://i.imgur.com/XTOYS97.png)
+
+**New Client (POST & PUT)**
+![Front End](https://i.imgur.com/ZvBEK4O.png)
+
+**Loading Screen While Deleting (DELETE)**
+![Front End](https://i.imgur.com/cwGRvTF.png)
+
+**Report/Summary of Purchases of a Client - ⭐️ Business Rule**
+![Front End](https://i.imgur.com/JLudVRe.png)
+
+**Send MenuItem Promotion to WhatsApp of Client - ⭐️ Business Rule**
+![Front End](https://i.imgur.com/gUz3vhi.png)
+![Front End](https://i.imgur.com/idVoyje.png)
+
+
 ## Activity 3️⃣ - React Front End for Node.js APIs Back End Applications
 
 ### Google Doc:

@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #111;
+}
+
+body {
+    min-height: 100vh;
+    /*background-color: rgb(179, 162, 106);*/
+    background-color: #fff;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 1rem 0.5rem;
+}
+
+section {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+a, a:visited {
+    color: #111;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+button,
+textarea {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+}
+
+label,
+button {
+    margin-top: 1rem;
+}
+
+button {
+    padding: 0.5rem;
+    background-color: rgb(144,30,56);
+    color: white;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
+.logo{
+    width: 25vw;
+    align-self: center;
+}
+
+.menuButton{
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;
+    align-items: center;
+    border: #000;
+    border-style: solid;
+    border-width: 2px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+
+    align-content: space-around;
+
+    min-height: 80px;
+    max-height: 25vh;
+
+    margin: 20px 0px;
+    padding: 0.5rem;
+    background-color: rgb(144,30,56);
+    text-decoration: none;
+}
+
+.menuButton > span{
+    color: #fff;
+
+}
+
+.iconMenu{
+    font-size: 100px;
+}
+
+.adminMenuContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.adminMenuContainer > div > a{
+    margin: 30px;
+}
+
+.dataGrid{
+    width: 75%;
+}
+/* Modified from https://stackoverflow.com/questions/306924/can-i-change-the-checkbox-size-using-css */
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+  margin-left: 25px;
+}

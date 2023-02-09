@@ -98,6 +98,30 @@ const AdminClients = () => {
             <Button onClick={handleDelete} sx={{background:'#8C1127', color:"#fff", "&:hover": {color: '#fff', background: '#DA2C43'}, borderRadius: '0.5rem'}}>Borrar</Button>
         );
     };
+    const ReportButton = (params) => {
+
+        async function handleReport() {
+            const idCardReport= params.row.idCard;
+
+            const reportClient = async () => {
+                try {
+                    const response = await axiosPrivate.get(`/restaurant/client/${idCardReport}/report`);
+                    alert(response.data.message)
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    // Wait
+                    await new Promise(r => setTimeout(r, 1500));
+                    
+                }
+            }
+            reportClient();
+        }
+
+        return (
+            <Button onClick={handleReport} sx={{background:'#7851A9', color:"#fff", "&:hover": {color: '#fff', background: '#880085'}, borderRadius: '0.5rem'}}>Reporte</Button>
+        );
+    };
     
     const columns = [
         { field: 'id', hide: true },
@@ -107,7 +131,8 @@ const AdminClients = () => {
         { field:'cellphone', headerName:'Teléfono', width: 200 },
         { field:'email', headerName:'Mail', width: 300 },
         { field:'modifyButton', headerName:'Modificar', width:150, renderCell: ModifyButton },
-        { field:'deleteButton', headerName:'Borrar', width:150, renderCell:DeleteButton }
+        { field:'deleteButton', headerName:'Borrar', width:120, renderCell:DeleteButton },
+        { field:'reportButton', headerName:'Reporte', width:150, renderCell:ReportButton }
     ];
 
     if (isLoading) {

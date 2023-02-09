@@ -29,14 +29,14 @@ const Admin = () => {
                         </Link>
                     </div>
                     <div>
-                        <Link to="/adminInvoices" className="menuButton">
-                            <FontAwesomeIcon icon={faFileInvoiceDollar} style={{color:'#fff'}} size={'3x'} />
-                            <span>Administrar Facturas</span>
-                        </Link>
-
                         <Link to="/adminUsers" className="menuButton">
                             <FontAwesomeIcon icon={faUsers} style={{color:'#fff'}} size={'3x'} />
                             <span>Administrar Usuarios</span>
+                        </Link>
+
+                        <Link to="/adminInvoices" className="menuButton">
+                            <FontAwesomeIcon icon={faFileInvoiceDollar} style={{color:'#fff'}} size={'3x'} />
+                            <span>Administrar Facturas</span>
                         </Link>
                     </div>
                 </div>

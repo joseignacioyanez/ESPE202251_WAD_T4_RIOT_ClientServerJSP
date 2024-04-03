@@ -149,10 +149,10 @@ public class Controller extends HttpServlet {
                         System.out.println("Password verified! Sending to role's respective view");
                         
                         // User Types Views
-                        if (userType.equals("admin")){
+                        if ("admin".equals(userType)){
                             viewToSend = adminMenuRoute;
                         }
-                        else if(userType.equals("cashier")){
+                        else if("cashier".equals(userType)){
                             viewToSend = invoicingViewRoute;
                         }
                     }
@@ -182,7 +182,7 @@ public class Controller extends HttpServlet {
                     menuItem.setName(request.getParameter("name"));
                     menuItem.setPrice(new BigDecimal(request.getParameter("price")));
                     String paysTaxesNew = request.getParameter("paysTaxes");
-                    if (paysTaxesNew.equals("yes") || paysTaxesNew.equals("no")){
+                    if ("yes".equals(paysTaxesNew) || "no".equals(paysTaxesNew)){
                         menuItem.setPaysTaxes(paysTaxesNew);
                     }
                     else{
@@ -267,7 +267,7 @@ public class Controller extends HttpServlet {
                         user.setPasswordHash(hashedPassword);
                         
                         String userTypeEntered = request.getParameter("userType");
-                        if (userTypeEntered.equals("cashier") || userTypeEntered.equals("admin"))
+                        if ("cashier".equals(userTypeEntered) || "admin".equals(userTypeEntered))
                         {
                             user.setType(request.getParameter("userType"));
                         }
